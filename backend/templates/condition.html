@@ -1,0 +1,98 @@
+{% extends "metronic/base.html" %}
+{% block js %}
+    {% load static %}
+    <script src="{%  static "assets/vendors/custom/flot/flot.bundle.js"%}" type="text/javascript"></script>
+    <script>
+        {% for unit in units %}
+        var t{{ unit.id }} = [{
+                label: "Normal",
+                data: {{ unit.count_level.normal }},
+                color : '#81FF73'
+            },
+            {
+                label: "Warning",
+                data: {{ unit.count_level.warning}},
+                color : '#FFDA83'
+            },
+            {
+                label: "Danger",
+                data: {{ unit.count_level.danger}},
+                color : '#FF8373'
+            },
+           ];
+        $.plot($("#m_flotcharts_{{ unit.id }}"), t{{ unit.id }}, {
+            series: {
+                pie: {
+                    innerRadius: 0.3,
+                    show: !0
+                }
+            },
+            legend: {
+                show: !1
+            }
+        })
+        {% endfor %}
+    </script>
+
+{% endblock %}
+{% block css %}
+    <style>
+    .chart_desc {
+        list-style: none;
+        padding: 0;
+        margin-left: 0;
+        font-weight: bold;
+    }
+    </style>
+{% endblock %}
+{% block body_block %}
+    <div class="row">
+        {% for unit in units  %}
+            <div class="col-lg-6">
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    {{unit.name}}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="m-portlet__head-tools">
+                            <ul class="m-portlet__nav">
+                                <li class="m-portlet__nav-item">
+                                    <a href="{% url "backend:unit_page" kondisi_id=condition_id unit_id=unit.id %}" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-brand m-btn--pill px-4">
+                                        Detail
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div id="m_flotcharts_{{ unit.id }}" style="height: 300px;"></div>
+                            </div>
+                            <div class="col-md-5 mt-5">
+                                <ul class="list-group">
+                                    <li class="list-group-item row">
+                                        <div class="float-left"><i class="fa fa-circle-o" style="color:#81FF73"></i> Normal</div>
+                                        <div class="float-right">{{ unit.count_level.normal }}</div>
+                                    </li>
+                                    <li class="list-group-item row">
+                                        <div class="float-left"><i class="fa fa-circle-o" style="color:#FFDA83"></i> Warning</div>
+                                        <div class="float-right">{{ unit.count_level.warning }}</div>
+                                    </li>
+                                    <li class="list-group-item row">
+                                        <div class="float-left"><i class="fa fa-circle-o" style="color:#FF8373"></i> Danger</div>
+                                        <div class="float-right">{{ unit.count_level.danger }}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Input Data</title>
+</head>
+<body>
+    <form action="/back/post/" method="post" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="kondisi" placeholder="kondisi"/>
+        <input type="text" name="unit" placeholder="unit"/>
+        <input type="file" name="data" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
+</body>
+</html>
