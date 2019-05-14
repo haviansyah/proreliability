@@ -40,18 +40,18 @@
                 opacity: 0.80
             }).appendTo("body").fadeIn(200);
         }
-
+        var head = [];
         {% for i in datas %}
-        var head{{ i.id }} = [
+            head["{{ i.name }}"] = [
             {% for j in i.dataset %}
                 [{{ forloop.counter }},{{j.1}}],
             {% endfor %}
            ];
         {% endfor %}
-        $.plot($("#m_flotcharts_trend"),[
+        var plot = $.plot($("#m_flotcharts_trend"),[
             {% for i in datas %}
             {
-                data : head{{ i.id }},
+                data : head["{{ i.name }}"],
                 label : "{{ i.name }}",
                 lines: {
                     lineWidth: 1
@@ -94,9 +94,48 @@
                 ticks: 11,
                 tickDecimals: 0,
                 tickColor: "#eee"
+            },
+            legend : {
+                labelFormatter: function(label, series){
+                    var lab = '<a href="#" class="legendButton" style="color:black" data-id="'+ label.split('/')[0] +'">' + label.split('/')[0] + '</a>';
+                    return lab;
+                }
             }
+
         });
         $("#m_flotcharts_trend").UseTooltip();
+        var c=document.getElementsByTagName("canvas")[0];
+        var canvas=c.getContext("2d");
+        var cx = c.width / 2;
+        var text="All";
+        canvas.font="bold 20px sans-serif";
+        canvas.textAlign = 'center';
+        canvas.fillText(text,cx,35);
+        var click
+        $('#m_flotcharts_trend').on('click', '.legendButton', function () {
+
+
+            if(click && click != $(this)) {
+                click.css('color', 'black');
+            }
+            $(this).css('color', 'red');
+            click = $(this);
+            data = [{
+                data : head[$(this).data('id')],
+                label : $(this).data('id'),
+                lines: {
+                    lineWidth: 1
+                },
+                shadowSize: 0
+            }];
+            plot.setData(data);
+            plot.draw();
+            var text=$(this).data('id');
+            canvas.font="bold 20px sans-serif";
+            canvas.textAlign = 'center';
+            canvas.fillText(text,cx,35);
+        });
+
     </script>
 
 {% endblock %}

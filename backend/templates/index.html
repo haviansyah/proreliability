@@ -40,11 +40,56 @@
             text-decoration: none;
             color:white;
         }
+
+        .pro-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .kondisi{
+            width: 600px;
+            margin-top : 0px;
+        }
+
+        .kondisi h3 {
+            color: white;
+        }
+
+        .kondisi .tombol{
+            text-align: center;
+            padding: 10px;
+        }
+
+        .kondisi a{
+            text-decoration: none;
+        }
+
+        .kondisi a:hover{
+            text-decoration: none;
+        }
+
+
+        .image {
+            height: 100px;
+
+        }
+        .helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .image img{
+            vertical-align: middle;
+            max-width: 80px;
+        }
+
+
     </style>
 </head>
-<body>
+<body style="overflow: hidden">
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent px-5 pt-3">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">PRO-Reliability</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -59,7 +104,7 @@
                   Hi! Pro-Reliability Admin
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Log Out</a>
+                  <a class="dropdown-item" href="{% url "logout" %}">Log Out</a>
                 </div>
             </li>
             <li>
@@ -70,6 +115,91 @@
         </ul>
       </div>
     </nav>
+
+    <div class="pro-frame">
+        <div class="kondisi mx-auto" >
+            <div class="row">
+                <div class="col-4 tombol mx-auto">
+                    <a href="#">
+                        <div class="image">
+                            <span class="helper"></span>
+                            <img class="img-fluid" src="{% static "assets/icon/assets-wellness.png" %}">
+                        </div>
+
+                        <h3>Assets Wellness</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 tombol">
+                    <a href="{% url "backend:condition_page" id=1 %}">
+                        <div class="image">
+                            <span class="helper"></span>
+                            <img class="img-fluid" src="{% static "assets/icon/vibration.png" %}">
+                        </div>
+
+                        <h3>Vibration</h3>
+                    </a>
+                </div>
+
+                <div class="col-4 tombol">
+                    <a href="{% url "backend:condition_page" id=1 %}">
+                        <div class="image">
+                            <span class="helper"></span>
+                            <img class="img-fluid" src="{% static "assets/icon/irt.png" %}">
+                        </div>
+
+                        <h3>IRT</h3>
+                    </a>
+                </div>
+
+                <div class="col-4 tombol">
+                    <a href="#">
+                        <div class="image">
+                            <span class="helper"></span>
+                             <img class="img-fluid" src="{% static "assets/icon/tribology.png" %}">
+                        </div>
+                        <h3>Tribology</h3>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4 tombol">
+                    <a href="#">
+                        <div class="image">
+                            <span class="helper"></span>
+                            <img class="img-fluid" src="{% static "assets/icon/dga.png" %}">
+                        </div>
+
+                        <h3>DGA</h3>
+                    </a>
+                </div>
+
+                <div class="col-4 tombol">
+                    <a href="#">
+                        <div class="image">
+                            <span class="helper"></span>
+                            <img class="img-fluid" src="{% static "assets/icon/pd.png" %}">
+                        </div>
+
+                        <h3>PD</h3>
+                    </a>
+                </div>
+
+                <div class="col-4 tombol">
+                    <a href="#">
+                        <div class="image">
+                            <span class="helper"></span>
+                             <img class="img-fluid" src="{% static "assets/icon/mcsa.png" %}">
+                        </div>
+                        <h3>MCSA</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 </body>

@@ -15,13 +15,24 @@ class Equipment(models.Model):
     name = models.CharField(max_length=200)
     Unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
     Condition = models.ForeignKey(Condition, on_delete=models.CASCADE)
+    @property
+    def detail(self):
+        return self.eqdetail_set.latest()
+
+
+class EqDetail(models.Model):
+    analisa = models.TextField(null=True)
+    rekomendasi = models.TextField(null=True)
+    catatan = models.TextField(null=True)
+    running_hour = models.IntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    Equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
 
 
 class Header(models.Model):
     name = models.CharField(max_length=100)
     hitung = models.BooleanField(default=True)
     Equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE)
-
 
 
 class MonitoringRow(models.Model):
@@ -48,8 +59,6 @@ class MonitoringData(models.Model):
         else :
             nlevel = 1
         return nlevel
-
-
 
 
 class Standard(models.Model):
