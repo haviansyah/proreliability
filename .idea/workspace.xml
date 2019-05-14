@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ab2cab7-0656-488d-adc3-86d3b1d9ca96" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proreliability/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/proreliability/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,10 +27,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proreliability/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
+            <state relative-caret-position="1547">
               <caret line="130" column="35" selection-start-line="130" selection-start-column="35" selection-end-line="130" selection-end-column="35" />
             </state>
           </provider>
@@ -82,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
-              <caret line="145" column="65" selection-start-line="145" selection-start-column="65" selection-end-line="145" selection-end-column="65" />
+              <caret line="103" column="21" selection-start-line="103" selection-start-column="21" selection-end-line="103" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -159,8 +158,8 @@
         <option value="$PROJECT_DIR$/backend/templates/trend.html" />
         <option value="$PROJECT_DIR$/backend/templates/unit.html" />
         <option value="$PROJECT_DIR$/backend/models.py" />
-        <option value="$PROJECT_DIR$/backend/templates/index.html" />
         <option value="$PROJECT_DIR$/proreliability/settings.py" />
+        <option value="$PROJECT_DIR$/backend/templates/index.html" />
       </list>
     </option>
   </component>
@@ -424,12 +423,12 @@
       <workItem from="1557701018365" duration="632000" />
       <workItem from="1557782483682" duration="648000" />
       <workItem from="1557783301035" duration="2995000" />
-      <workItem from="1557809996933" duration="12138000" />
+      <workItem from="1557809996933" duration="12791000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45038000" />
+    <option name="totallyTimeSpent" value="45691000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -605,17 +604,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/proreliability/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="145" column="65" selection-start-line="145" selection-start-column="65" selection-end-line="145" selection-end-column="65" />
+        <state relative-caret-position="1547">
+          <caret line="130" column="35" selection-start-line="130" selection-start-column="35" selection-end-line="130" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proreliability/settings.py">
+    <entry file="file://$PROJECT_DIR$/backend/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="130" column="35" selection-start-line="130" selection-start-column="35" selection-end-line="130" selection-end-column="35" />
+        <state relative-caret-position="190">
+          <caret line="103" column="21" selection-start-line="103" selection-start-column="21" selection-end-line="103" selection-end-column="21" />
         </state>
       </provider>
     </entry>
