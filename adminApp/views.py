@@ -1,3 +1,5 @@
+from urllib.request import parse_keqv_list
+
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
@@ -7,6 +9,36 @@ import datetime
 from backend.models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
+
+@api_view(['POST','GET'])
+def api_get_detail_equipment(request):
+    if request.method == 'GET':
+        id_equipment = request.GET.get("id")
+        equipment = Equipment.objects.get(pk=id_equipment)
+        detail = equipment.detail
+        if detail is not None:
+            data = {
+                "analisa": detail.analisa,
+                "rekomendasi": detail.rekomendasi,
+                "catatan": detail.catatan
+            }
+        else :
+            data = {
+
+                "analisa": None,
+                "rekomendasi": None,
+                "catatan": None
+            }
+        return Response({"id": equipment.id, "name": equipment.name, "detail": data})
+    elif request.method == 'POST':
+        id_equipment = request.POST["id"]
+        analisa = request.POST.get("analisa",None)
+        rekomendasi = request.POST.get("rekomendasi", None)
+        catatan = request.POST.get("catatan", None)
+        newDetail = EqDetail(Equipment_id=id_equipment, analisa=analisa, rekomendasi=rekomendasi, catatan=catatan)
+        newDetail.save()
+        return Response({"status": "success"})
 
 
 @api_view(['POST'])
@@ -96,15 +128,16 @@ def api_get_trend(request):
 
 
 def get_data_header(header):
-    data = [[i.MonitoringRow.tanggal,  i.nilai] for i in header.monitoringdata_set.all()]
+    data = [[i.MonitoringRow.tanggal,  i.nilai] for i in header.monitoringdata_set.order_by('MonitoringRow__tanggal')]
     return data
+
 
 @api_view(['POST'])
 def api_get_header(request):
     id_header = request.POST["id"]
     header = Header.objects.get(pk=id_header)
     name = header.name
-    data = [{"tanggal":i.MonitoringRow.tanggal,"nilai":i.nilai} for i in header.monitoringdata_set.all()]
+    data = [{"tanggal":i.MonitoringRow.tanggal,"nilai":i.nilai} for i in header.monitoringdata_set.order_by('MonitoringRow__tanggal')]
     hasil = {"name":name, "data":data}
     return Response(hasil)
 
@@ -144,7 +177,7 @@ def testing(request):
     #     return HttpResponse(newMRow)
 
 
-# @api_view(['POST'])
+@api_view(['POST'])
 def insert(request):
     start = time.time()
     data = request.FILES.get('data')
@@ -162,7 +195,9 @@ def insert(request):
         newCondition.save()
         newCondition.Unit.add(newUnit)
     else:
-        newCondition = Condition.objects.filter(name = kondisi_name).first()
+        newCondition = Condition.objects.get(name = kondisi_name)
+        if not newCondition.Unit.filter(pk=newUnit.id) :
+            newCondition.Unit.add(newUnit)
 
 
 
@@ -177,7 +212,7 @@ def insert(request):
             newEq = Equipment(name=equipment_name,Unit=newUnit,Condition=newCondition)
             newEq.save()
         else:
-            newEq = Equipment.objects.get(name=equipment_name)
+            newEq = Equipment.objects.get(name=equipment_name, Unit=newUnit,Condition=newCondition)
             adaEq = True
 
         equipment_id = newEq.id
@@ -187,7 +222,10 @@ def insert(request):
 
         if not adaEq:
             for headers in get_header(sheet)[3:-1]:
-                newHeader = Header(Equipment=newEq,name=headers[0])
+                hit = True
+                if headers[0].strip().lower() is "fan" :
+                    hit = False
+                newHeader = Header(Equipment=newEq,name=headers[0],hitung=hit)
                 newHeader.save()
                 header_id = newHeader.id
 
@@ -201,20 +239,41 @@ def insert(request):
 
                 header_ids.append(header_id)
         else:
-            header_ids = [i.id for i in newEq.header_set.all()]
+            header_ids = [i.id for i in newEq.header_set.order_by('pk')]
         # INSERTING ROW DATA
+        error = []
         for row in range(2, sheet.nrows - 3):
             if sheet.cell_value(row, 1) != '':
+                tanggal_type = sheet.cell_type(row, 1)
+                if tanggal_type != 3 :
+                    error.append({
+                        "equipment" : newEq.name,
+                        "baris" : row,
+                        "kolom": "tanggal"
+                    })
+                    continue
+
                 tanggal = sheet.cell_value(row, 1)
                 tanggal_datetime = datetime.datetime(*xlrd.xldate_as_tuple(tanggal, book.datemode))
                 tanggal_string = tanggal_datetime.strftime("%Y-%m-%d")
                 waktu = sheet.cell_value(row, 2)
+                waktu_type = sheet.cell_type(row,2)
                 waktu_string = None
-                if waktu != '':
+
+                if waktu != '' and waktu_type == 3 :
                     waktu_2 = int(waktu * 24 * 3600)  # convert to number of seconds
-                    waktu_time = datetime.time(int(waktu_2 // 3600), int((waktu_2 % 3600) // 60), int(waktu_2 % 60))
-                    waktu_string = waktu_time.strftime("%H:%M:%S")
-                if newEq.monitoringrow_set.filter(tanggal=tanggal_string, waktu=waktu_string,Equipment=newEq).exists():
+                    try :
+                        waktu_time = datetime.time(int(waktu_2 // 3600), int((waktu_2 % 3600) // 60), int(waktu_2 % 60))
+                        waktu_string = waktu_time.strftime("%H:%M:%S")
+                    except :
+                        error.append({
+                            "equipment": newEq.name,
+                            "baris": row,
+                            "kolom" : "waktu"
+                        })
+
+
+                if newEq.monitoringrow_set.filter(tanggal=tanggal_string,waktu=waktu_string,Equipment=newEq).exists():
                     continue
                 newMRow = MonitoringRow(tanggal=tanggal_string, waktu=waktu_string,Equipment=newEq)
                 newMRow.save()
@@ -229,6 +288,20 @@ def insert(request):
                         newMData = MonitoringData(MonitoringRow=newMRow,nilai=nilai,Header_id=header_ids[header_idx])
                         newMDatas.append(newMData)
                 MonitoringData.objects.bulk_create(newMDatas)
+                if len(newMRow.monitoringdata_set.all()) == 0 :
+                    newMRow.delete()
     end = time.time()
-    print(str(end-start)+"Detik")
-    return HttpResponse("Berhasil")
+
+    if len(error) != 0 :
+        ret = {
+            "status" : "error",
+            "details" : error,
+            "runtime": end - start,
+        }
+    else :
+        ret = {
+            "status": "success",
+            "runtime": end - start,
+        }
+
+    return Response(ret)

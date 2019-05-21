@@ -17,7 +17,10 @@ class Equipment(models.Model):
     Condition = models.ForeignKey(Condition, on_delete=models.CASCADE)
     @property
     def detail(self):
-        return self.eqdetail_set.latest()
+        try:
+            return self.eqdetail_set.latest('created_at')
+        except:
+            return None
 
 
 class EqDetail(models.Model):

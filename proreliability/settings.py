@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'adminApp',
-    'backend.apps.BackendConfig',
+    'backend',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'proreliability',
+        # 'NAME': 'pltu2',
         'USER': 'haviansyah',
         'PASSWORD': 'mat520lp',
         'HOST': 'localhost',

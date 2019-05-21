@@ -1,4 +1,25 @@
 {% extends "metronic/base.html" %}
+
+{% block css %}
+<style>
+    .info-item {
+        margin-top: 1.2rem;
+    }
+
+    .info-item span {
+        display: block;
+    }
+
+    .info-item > span:first-child {
+        font-size: .85em;
+    }
+
+    .info-item:first-child {
+        margin-top: 0;
+    }
+</style>
+{% endblock %}
+
 {% block js %}
     <script>
     var DatatableHtmlTableDemo= {
@@ -48,7 +69,76 @@
 
     ;
     jQuery(document).ready(function() {
-        DatatableHtmlTableDemo.init()
+        DatatableHtmlTableDemo.init();
+
+        $(document).on('click','.btn-detail',function () {
+            $.ajax({
+                url : "/back/detail",
+                method : "GET",
+                data : {"id" : $(this).data('id')  },
+                success : function(data){
+                    $('#equipment-id-detail').val(data.id);
+
+                    $('#btn-modal-detail-edit').show();
+                    $('#btn-modal-detail-submit').hide();
+
+                    $('#btn-modal-detail').removeClass('.btn-submit-modal');
+                    $('#ed-detail').hide();
+                    $('#info-detail').show();
+                    $('#equipment-name').text(data.name);
+                    $('#sp-analisa').text(data.detail.analisa || "Tidak Ada Analisa");
+                    $('#sp-rekomendasi').text(data.detail.rekomendasi || "Tidak Ada Rekomendasi");
+                    $('#sp-catatan').text(data.detail.catatan || "Tidak Ada Catatan");
+                    $('#txt-analisa').val(data.detail.analisa);
+                    $('#txt-rekomendasi').val(data.detail.rekomendasi);
+                    $('#txt-catatan').val(data.detail.catatan);
+
+                    $('#modalDetail').modal('show');
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+        });
+
+        $('#btn-modal-detail-edit').click(function () {
+            $('#ed-detail').show();
+            $('#info-detail').hide();
+            $('#btn-modal-detail-edit').hide();
+            $('#btn-modal-detail-submit').show();
+        });
+
+
+
+        let insertData  = function(e){
+
+            $.ajax({
+              url:  '/back/detail/',
+              type: 'POST',
+              async: true,
+              data : {
+                  csrfmiddlewaretoken : "Uo3mGUw5HXjEmz6mBONa1t3R39ivvLTuHlmsfQc9SV7f7Pv6dUVk1X3WH3GqYMdA",
+                  analisa : $('#txt-analisa').val(),
+                  rekomendasi : $('#txt-rekomendasi').val(),
+                  catatan : $('#txt-catatan').val(),
+                  id : $('#equipment-id-detail').val()
+              },
+              cache: false,
+              success: function(data){
+                  $('#modalDetail').modal('hide');
+                  swal("Sukses!", "Dettail Berhasil DiUpdate", "success")
+                  $('#btn-modal-detail-submit').one('click', insertData);
+              },
+              error: function(e){
+                  console.log(e)
+              }
+            });
+            e.stopImmediatePropagation();
+            return false;
+        }
+
+        $('#btn-modal-detail-submit').one('click',insertData);
+
     }
 
     );
@@ -57,22 +147,67 @@
 {% block body_block %}
 
    <!-- Modal Detail -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="equipment-name">TURBINE GENERATOR UNIT 1</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+
+              <div id="ed-detail" style="display: none ">
+                  <form id="form-detail" method="post" action="/back/detail/">
+                      {% csrf_token %}
+                      <input id="equipment-id-detail" type="hidden" name="id"/>
+                      <div class="form-group m-form__group">
+                          <label for="exampleTextarea">
+                              Analisa
+                          </label>
+                          <textarea name="analisa" class="form-control m-input" id="txt-analisa" rows="3"></textarea>
+                      </div>
+                      <div class="form-group m-form__group">
+                          <label for="exampleTextarea">
+                              Rekomendasi
+                          </label>
+                          <textarea name="rekomendasi" class="form-control m-input" id="txt-rekomendasi" rows="3"></textarea>
+                      </div>
+                      <div class="form-group m-form__group">
+                          <label for="exampleTextarea">
+                              Catatan
+                          </label>
+                          <textarea name="catatan" class="form-control m-input" id="txt-catatan" rows="3"></textarea>
+                      </div>
+                  </form>
+              </div>
+              <div id="info-detail">
+                  <div class="info-item">
+                      <span>Analisa</span>
+                      <span id="sp-analisa"></span>
+                  </div>
+                  <div class="info-item">
+                      <span>Rekomendasi</span>
+                      <span id="sp-rekomendasi"></span>
+                  </div>
+                  <div class="info-item">
+                      <span>Catatan</span>
+                      <span id="sp-catatan"></span>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                  Close
+                </button>
+                <button type="button" id="btn-modal-detail-edit" class="btn btn-primary">
+                  Edit
+                </button>
+                <button type="button" id="btn-modal-detail-submit" class="btn btn-primary" style="display: none ">
+                  Simpan
+                </button>
+            </div>
         </div>
       </div>
     </div>
@@ -159,7 +294,7 @@
                         <td>{{ report.titik_ukur}}</td>
                         <td>
                             <a href="{% url "backend:trend_page" id=report.id %}" class=" btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--pill" style="color:white"><i class="fa fa-line-chart"></i></a>
-                            <a href="#" class=" btn btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--pill"><i class="fa fa-chevron-up"></i></a>
+                            <a href="#" class="btn-detail btn btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--pill" data-id="{{ report.id }}"><i class="fa fa-chevron-up"></i></a>
                         </td>
                         </tr>
                         {% endfor %}
