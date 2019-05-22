@@ -6,8 +6,11 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 import requests
 
-# TODO : BUAT HALAMAN TREND , FLOTCHARTS DYNAMIC
 
+def link(request):
+    method = request.is_secure() and "https" or "http"
+    alamat = method+"://" + request.META['HTTP_HOST'];
+    return alamat
 
 def test(request):
     equipment = Equipment.objects.get(pk=1)
@@ -27,7 +30,7 @@ def user_logout(request):
 
 @login_required
 def condition(request,id):
-    response = requests.post('https://'+request.META['HTTP_HOST']+'/back/condition/',data={"id":id})
+    response = requests.post(link(request)+'/back/condition/',data={"id":id})
     condition_data = response.json()
     id = condition_data["id"]
     title = condition_data["name"]
@@ -37,7 +40,7 @@ def condition(request,id):
 
 @login_required
 def unit(request,kondisi_id,unit_id):
-    response = requests.post('https://'+request.META['HTTP_HOST']+'/back/unit/',data={"unit_id":unit_id,"kondisi_id":kondisi_id})
+    response = requests.post(link(request)+'/back/unit/',data={"unit_id":unit_id,"kondisi_id":kondisi_id})
     unit_data = response.json()
     title = Condition.objects.get(pk=kondisi_id).name + " " +unit_data["name"]
     reports = unit_data["report"]
@@ -46,7 +49,7 @@ def unit(request,kondisi_id,unit_id):
 
 @login_required
 def trend(request,id):
-    response = requests.post('https://'+request.META['HTTP_HOST']+'/back/trend/',data={"id":id})
+    response = requests.post(link(request)+'/back/trend/',data={"id":id})
     eqt = Equipment.objects.get(pk=id)
     eqt_data = response.json()
     title = eqt.Condition.name + " | " + eqt.Unit.name
