@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ab2cab7-0656-488d-adc3-86d3b1d9ca96" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/templates/dcs.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/dcs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/trend.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/trend.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +52,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/templates/dcs.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
@@ -120,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/templates/trend.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="57" column="18" lean-forward="true" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
+            <state relative-caret-position="17">
+              <caret line="150" column="14" selection-start-line="150" selection-start-column="14" selection-end-line="150" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -198,7 +198,6 @@
         <option value="$PROJECT_DIR$/adminApp/urls.py" />
         <option value="$PROJECT_DIR$/backend/templates/unit.html" />
         <option value="$PROJECT_DIR$/backend/templates/metronic/base.html" />
-        <option value="$PROJECT_DIR$/backend/templates/trend.html" />
         <option value="$PROJECT_DIR$/adminApp/views.py" />
         <option value="$PROJECT_DIR$/backend/templates/condition.html" />
         <option value="$PROJECT_DIR$/backend/views.py" />
@@ -206,6 +205,7 @@
         <option value="$PROJECT_DIR$/../01. PROJECT WEBSITE/proreability/src/App.js" />
         <option value="$PROJECT_DIR$/backend/templates/index.html" />
         <option value="$PROJECT_DIR$/backend/templates/dcs.html" />
+        <option value="$PROJECT_DIR$/backend/templates/trend.html" />
       </list>
     </option>
   </component>
@@ -489,12 +489,12 @@
       <workItem from="1558517920220" duration="1418000" />
       <workItem from="1558523013100" duration="599000" />
       <workItem from="1558605489775" duration="5799000" />
-      <workItem from="1558677786139" duration="15981000" />
+      <workItem from="1558677786139" duration="16600000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101647000" />
+    <option name="totallyTimeSpent" value="102266000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -509,7 +509,7 @@
     <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3540091" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3540091" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -523,7 +523,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.36714977" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.36714977" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -675,13 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/templates/trend.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="57" column="18" lean-forward="true" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -761,6 +754,13 @@
             <element signature="e#1728#1747#0#HTML" expanded="true" />
             <element signature="e#1806#1825#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/trend.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="150" column="14" selection-start-line="150" selection-start-column="14" selection-end-line="150" selection-end-column="14" />
         </state>
       </provider>
     </entry>
