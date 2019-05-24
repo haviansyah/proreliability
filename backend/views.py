@@ -29,6 +29,11 @@ def user_logout(request):
 
 
 @login_required
+def dcs_realtime(request):
+    return render(request, 'dcs.html')
+
+
+@login_required
 def condition(request,id):
     response = requests.post(link(request)+'/back/condition/',data={"id":id})
     condition_data = response.json()

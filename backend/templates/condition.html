@@ -87,7 +87,7 @@
                             $("#err").html("<p>Kesalahan : </p>"+html).fadeIn();
 
                         } else {
-
+                            mApp.unblock("#modalUpload .modal-content");
                             $("#form")[0].reset();
                             $('#modalUpload').modal('toggle');
                             swal("Sukses!", "Data Berhasil Di Upload", "success").then(function(e){

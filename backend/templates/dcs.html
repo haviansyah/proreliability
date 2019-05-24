@@ -1,0 +1,94 @@
+{% extends "metronic/base.html" %}
+{% load static %}
+
+{% block js %}
+    <script>
+    NodeList.prototype.forEach = Array.prototype.forEach;
+    var datas = []
+
+    var fetchData = () => {
+        fetch("http://12a15ab0.ngrok.io/")
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            datas = data;
+            i = 0;
+            document.querySelectorAll('.detail').forEach(function (el) {
+                angka = parseFloat(data[i]).toFixed(2)
+                el.innerHTML = angka + " um";
+                if(angka > 250){
+                    el.style.color = "red";
+                }else if(angka > 125){
+                     el.style.color = "yellow";
+                }else{
+                     el.style.color = "white";
+                }
+                i = i + 1;
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    fetchData();
+    setInterval(fetchData,500);
+    </script>
+{% endblock %}
+
+{% block css %}
+<style>
+.image-container{
+    
+    background-image: url("{% static "assets/dcs/steamturbine.gif" %}") ;
+    width: 960px;
+    height: 510px;
+    background-size: contain;
+}
+.detail{
+  position : absolute;
+  color : white;
+  font-size: 0.9em;
+  width : 90px;
+  text-align: left;
+}
+
+.atas {
+  top: 120px
+}
+.bawah {
+  top: 140px
+}
+
+
+</style>
+{%  endblock %}
+
+{% block body_block %}
+    <div class="row">
+        <div class="col-12">
+
+            <div class="image-container">
+                <span class="detail atas" style="left :210px">um</span>
+                <span class="detail bawah" style="left :210px">um</span>
+
+                <span class="detail atas" style="left :340px">um</span>
+                <span class="detail bawah" style="left :340px">um</span>
+
+                <span class="detail atas" style="left :430px">um</span>
+                <span class="detail bawah" style="left :430px">um</span>
+
+                <span class="detail atas" style="left :510px">um</span>
+                <span class="detail bawah" style="left :510px">um</span>
+
+                <span class="detail atas" style="left :610px">um</span>
+                <span class="detail bawah" style="left :610px">um</span>
+
+                <span class="detail atas" style="left :720px">um</span>
+                <span class="detail bawah" style="left :720px">um</span>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
