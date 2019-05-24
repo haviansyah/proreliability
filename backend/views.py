@@ -44,7 +44,7 @@ def unit(request,kondisi_id,unit_id):
     unit_data = response.json()
     title = Condition.objects.get(pk=kondisi_id).name + " " +unit_data["name"]
     reports = unit_data["report"]
-    return render(request,'unit.html',{"title":title,"reports":reports})
+    return render(request,'unit.html',{"link":"/back/download/?id_kondisi=%i&id_unit=%i"% (kondisi_id,unit_id),"title":title,"reports":reports})
 
 
 @login_required

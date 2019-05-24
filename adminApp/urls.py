@@ -14,5 +14,6 @@ urlpatterns =[
     path('trend/', views.api_get_trend ),
     path('condition/', views.api_get_condition),
     path('detail/', views.api_get_detail_equipment),
+    path('download/', views.api_download_unit_rekap),
 
 ]

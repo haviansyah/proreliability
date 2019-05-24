@@ -1,14 +1,87 @@
 from urllib.request import parse_keqv_list
-
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
 import xlrd
+import xlwt
 import time
 import datetime
 from backend.models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
+def xls_to_response(xls, fname):
+    response = HttpResponse(content_type="application/ms-excel")
+    response['Content-Disposition'] = 'attachment; filename=%s' % fname
+    xls.save(response)
+    return response
+
+@api_view(['POST','GET'])
+def api_download_unit_rekap(request):
+    id_kondisi = request.GET.get("id_kondisi")
+    id_unit = request.GET.get("id_unit")
+    kondisi = Condition.objects.get(pk=id_kondisi)
+    unit = Unit.objects.get(pk=id_unit)
+    equipment = Equipment.objects.filter(Condition_id=id_kondisi, Unit_id=id_unit)
+    reports = [get_report_equip(i) for i in equipment]
+    name = unit.name
+    book = xlwt.Workbook()
+    judul = "DATA "+" "+kondisi.name+" "+name
+    sheet1 = book.add_sheet(judul)
+    row = sheet1.row(0)
+    headfmt = xlwt.Style.easyxf("""
+                font : bold on;  align: vert center, horiz center;
+                pattern: pattern solid, fore_colour light_yellow; """)
+    row.write(0,"No",headfmt)
+    row.write(1,"Tanggal",headfmt)
+    row.write(2,"Equipment",headfmt)
+    row.write(3,"Nilai",headfmt)
+    row.write(4,"Level",headfmt)
+    row.write(5,"Titik Ukur",headfmt)
+    row.write(6, "Analisa", headfmt)
+    row.write(7, "Rekomenndasi", headfmt)
+    row.write(8, "Catatan", headfmt)
+
+
+    for key, report in enumerate(reports):
+        row = sheet1.row(key+1)
+        row.write(0,key+1)
+        datefmt = xlwt.Style.easyxf(num_format_str='D-MMM-YY')
+        row.write(1,report["tanggal"],datefmt)
+        row.write(2,report["equipment_name"])
+        row.write(3,report["nilai"])
+        level = report["level"]
+        equipment = Equipment.objects.get(pk=report["id"])
+        detail = equipment.detail
+        if detail is not None:
+            row.write(6, detail.analisa)
+            row.write(7, detail.rekomendasi)
+            row.write(8, detail.catatan)
+        else :
+            row.write(6, "-")
+            row.write(7, "-")
+            row.write(8, "-")
+        color = "white"
+        cLevel = ""
+        if level == 1 :
+            cLevel = "A"
+            color = "blue"
+        elif level == 2 :
+            cLevel = "B"
+            color = "green"
+        elif level == 3 :
+            cLevel = "C"
+            color = "yellow"
+        else :
+            cLevel = "D"
+            color = "red"
+
+        levelfmt = xlwt.Style.easyxf("pattern: pattern solid, fore_colour %s;" % color)
+        row.write(4,cLevel,levelfmt)
+        row.write(5,report["titik_ukur"])
+
+
+    return xls_to_response(book,judul+".xls")
 
 
 @api_view(['POST','GET'])
@@ -56,13 +129,11 @@ def api_get_unit(request):
     id_kondisi = request.POST["kondisi_id"]
     id_unit = request.POST["unit_id"]
     level = int(request.POST.get('level', 0))
-
     unit = Unit.objects.get(pk=id_unit)
     equipment = Equipment.objects.filter(Condition_id=id_kondisi, Unit_id=id_unit)
     report = [get_report_equip(i) for i in equipment]
     if level != 0:
         report = list(filter(lambda x: x["level"] == level, report))
-
     name = unit.name
     count_level = get_count_level(report)
     hasil = {
@@ -91,6 +162,7 @@ def get_report_equip(equipment):
     ret["titik_ukur"] = maks_data.Header.name
     ret["hitung"] = maks_data.Header.hitung
     return ret
+
 
 def get_count_level(unit):
     normal = len(list(filter(lambda d: d["level"] == 1 or d["level"] == 2,unit)))
@@ -163,9 +235,6 @@ def get_report(request):
     return HttpResponse(hasil,content_type="application/json")
 
 
-
-
-
 def testing(request):
     eqt = Equipment.objects.get(pk=1)
     newMRow = MonitoringRow(tanggal='2017-06-20', waktu='09:00:00', Equipment = eqt)
@@ -198,23 +267,17 @@ def insert(request):
         newCondition = Condition.objects.get(name = kondisi_name)
         if not newCondition.Unit.filter(pk=newUnit.id) :
             newCondition.Unit.add(newUnit)
-
-
-
     book = xlrd.open_workbook(data.name, file_contents=data.read())
-
+    error = []
     for sheet in book.sheets():
         adaEq = False
-
         equipment_name = sheet.cell_value(rowx=0, colx=0)
-
         if Equipment.objects.filter(name=equipment_name,Condition_id=newCondition.id,Unit_id=newUnit.id).count() == 0:
             newEq = Equipment(name=equipment_name,Unit=newUnit,Condition=newCondition)
             newEq.save()
         else:
             newEq = Equipment.objects.get(name=equipment_name, Unit=newUnit,Condition=newCondition)
             adaEq = True
-
         equipment_id = newEq.id
         header_ids = []
 
@@ -241,14 +304,14 @@ def insert(request):
         else:
             header_ids = [i.id for i in newEq.header_set.order_by('pk')]
         # INSERTING ROW DATA
-        error = []
+
         for row in range(2, sheet.nrows - 3):
             if sheet.cell_value(row, 1) != '':
                 tanggal_type = sheet.cell_type(row, 1)
                 if tanggal_type != 3 :
                     error.append({
                         "equipment" : newEq.name,
-                        "baris" : row,
+                        "baris" : row+1,
                         "kolom": "tanggal"
                     })
                     continue
@@ -268,7 +331,7 @@ def insert(request):
                     except :
                         error.append({
                             "equipment": newEq.name,
-                            "baris": row,
+                            "baris": row+1,
                             "kolom" : "waktu"
                         })
 

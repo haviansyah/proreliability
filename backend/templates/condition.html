@@ -1,67 +1,206 @@
 {% extends "metronic/base.html" %}
 {% block js %}
     {% load static %}
-    <script src="{%  static "assets/vendors/custom/flot/flot.bundle.js"%}" type="text/javascript"></script>
+    <script src="{% static "assets/vendors/custom/flot/flot.bundle.js" %}" type="text/javascript"></script>
     <script>
         {% for unit in units %}
-        var t{{ unit.id }} = [{
+            var t{{ unit.id }} = [{
                 label: "Normal",
                 data: {{ unit.count_level.normal }},
-                color : '#81FF73'
+                color: '#81FF73'
             },
-            {
-                label: "Warning",
-                data: {{ unit.count_level.warning}},
-                color : '#FFDA83'
-            },
-            {
-                label: "Danger",
-                data: {{ unit.count_level.danger}},
-                color : '#FF8373'
-            },
-           ];
-        $.plot($("#m_flotcharts_{{ unit.id }}"), t{{ unit.id }}, {
-            series: {
-                pie: {
-                    innerRadius: 0.3,
-                    show: !0
+                {
+                    label: "Warning",
+                    data: {{ unit.count_level.warning}},
+                    color: '#FFDA83'
+                },
+                {
+                    label: "Danger",
+                    data: {{ unit.count_level.danger}},
+                    color: '#FF8373'
+                },
+            ];
+            $.plot($("#m_flotcharts_{{ unit.id }}"), t{{ unit.id }}, {
+                series: {
+                    pie: {
+                        innerRadius: 0.3,
+                        show: !0
+                    }
+                },
+                legend: {
+                    show: !1
                 }
-            },
-            legend: {
-                show: !1
-            }
-        })
+            })
         {% endfor %}
+        var nama_unit_from = 0;
+        $("#selPilihUnit").change(function (e) {
+            var pilihan = $(this).val();
+            if (pilihan == 0) {
+                $('#txtTambahNamaUnit').show();
+                nama_unit_from = 1;
+            } else {
+                $('#txtTambahNamaUnit').hide();
+                nama_unit_from = 0;
+            }
+        });
+
+        $('#form').unbind('submit').bind('submit', function (e) {
+            e.preventDefault();
+            var nama = "";
+            if(nama_unit_from == 0){
+                nama = $("#selPilihUnit").val();
+            }else{
+                nama = $("#txtTambahNamaUnit").val();
+            }
+
+            var file = $('#uploadImage').val();
+
+            if (nama != "" && file != "") {
+                var formData = new FormData(this);
+                formData.append('unit', nama);
+                $.ajax({
+                    url: "/back/post/",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    beforeSend: function () {
+                         mApp.block("#modalUpload .modal-content", {
+                                overlayColor: "#000000",
+                                type: "loader",
+                                state: "primary",
+                                message: "Processing..."
+                            });
+                        $("#err").fadeOut();
+                    },
+                    success: function (data) {
+                        mApp.unblock("#modalUpload .modal-content");
+                        if (data.status == 'error') {
+                            swal("Ada Kesalahan", "Ada Kesalahan Di Format Yang Anda Upload", "error")
+                            var html = "";
+                            data.details.forEach(function(error){
+                                html += "<p>";
+                                html += " Sheet : "+ error.equipment + ", Baris : " + error.baris + ", Kolom : " +  error.kolom;
+                                html += "</p>"
+                            });
+                            $("#err").html("<p>Kesalahan : </p>"+html).fadeIn();
+
+                        } else {
+
+                            $("#form")[0].reset();
+                            $('#modalUpload').modal('toggle');
+                            swal("Sukses!", "Data Berhasil Di Upload", "success").then(function(e){
+                                location.reload();
+                            });
+
+                        }
+                    },
+                    error: function (e) {
+                        $("#err").html(e).fadeIn();
+                    }
+                });
+            } else {
+                alert("Mohon Isi Semua")
+            }
+        });
     </script>
 
 {% endblock %}
 {% block css %}
     <style>
-    .chart_desc {
-        list-style: none;
-        padding: 0;
-        margin-left: 0;
-        font-weight: bold;
-    }
+        .chart_desc {
+            list-style: none;
+            padding: 0;
+            margin-left: 0;
+            font-weight: bold;
+        }
     </style>
 {% endblock %}
+{% block left_button_block %}
+    <a href="#" data-toggle="modal" data-target="#modalUpload"
+       class="m-portlet__nav-link btn btn-brand  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--pill">
+        Upload </a>
+{% endblock %}
 {% block body_block %}
+    <!-- Modal Detail -->
+    <div class="modal fade" id="modalUpload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="equipment-name">Upload Data {{ title }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row">
+                            {% csrf_token %}
+                            <input type="hidden" name="kondisi" value="{{ title }}"/>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Unit :</label>
+                                    <select class="form-control" id="selPilihUnit">
+                                        {% for unit in units %}
+                                            <option value="{{ unit.name }}">{{ unit.name }}</option>
+                                        {% endfor %}
+                                        <option value="0">Tambah</option>
+                                    </select>
+                                    <input type="text" class="form-control" id="txtTambahNamaUnit"
+                                           placeholder="Nama Unit" style="display: none">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label>Upload Data Excel (.XLSX)</label>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <input id="uploadImage" type="file"
+                                           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                           name="data"/>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12">
+                                <div class="mt-2" style="color : red;" id="err"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Close
+                        </button>
+
+                        <input type="submit" id="btn-modal-detail-submit" class="btn btn-primary">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <div class="row">
-        {% for unit in units  %}
+        {% for unit in units %}
             <div class="col-lg-6">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
-                                    {{unit.name}}
+                                    {{ unit.name }}
                                 </h3>
                             </div>
                         </div>
                         <div class="m-portlet__head-tools">
                             <ul class="m-portlet__nav">
                                 <li class="m-portlet__nav-item">
-                                    <a href="{% url "backend:unit_page" kondisi_id=condition_id unit_id=unit.id %}" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-brand m-btn--pill px-4">
+                                    <a href="{% url "backend:unit_page" kondisi_id=condition_id unit_id=unit.id %}"
+                                       class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-brand m-btn--pill px-4">
                                         Detail
                                     </a>
                                 </li>
@@ -76,15 +215,21 @@
                             <div class="col-md-5 mt-5">
                                 <ul class="list-group">
                                     <li class="list-group-item row">
-                                        <div class="float-left"><i class="fa fa-circle-o" style="color:#81FF73"></i> Normal</div>
+                                        <div class="float-left"><i class="fa fa-circle-o" style="color:#81FF73"></i>
+                                            Normal
+                                        </div>
                                         <div class="float-right">{{ unit.count_level.normal }}</div>
                                     </li>
                                     <li class="list-group-item row">
-                                        <div class="float-left"><i class="fa fa-circle-o" style="color:#FFDA83"></i> Warning</div>
+                                        <div class="float-left"><i class="fa fa-circle-o" style="color:#FFDA83"></i>
+                                            Warning
+                                        </div>
                                         <div class="float-right">{{ unit.count_level.warning }}</div>
                                     </li>
                                     <li class="list-group-item row">
-                                        <div class="float-left"><i class="fa fa-circle-o" style="color:#FF8373"></i> Danger</div>
+                                        <div class="float-left"><i class="fa fa-circle-o" style="color:#FF8373"></i>
+                                            Danger
+                                        </div>
                                         <div class="float-right">{{ unit.count_level.danger }}</div>
                                     </li>
                                 </ul>
