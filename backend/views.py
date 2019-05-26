@@ -23,6 +23,26 @@ def index(request):
 
 
 @login_required
+def asset_wellness_unit(request,unit):
+    response = requests.get(link(request) + '/back/getAW/'+unit)
+    unit_data = response.json()
+    title = "Asset Wellness " + unit_data["name"]
+    reports = unit_data["data"]
+    return render(request, 'unit_aw.html',
+                  { "title": title,
+                   "reports": reports})
+
+
+@login_required
+def asset_wellness_all(request):
+    response = requests.get(link(request) + '/back/getAW/')
+    condition_data = response.json()
+    title = "Asset Wellness"
+    units = condition_data["units"]
+    return render(request, 'aw.html', {"condition_id": 12, "title": title, "units": units})
+
+
+@login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
@@ -60,6 +80,7 @@ def trend(request,id):
     title = eqt.Condition.name + " | " + eqt.Unit.name
     datas = eqt_data["data"]
     return render(request,'trend.html',{"equipment":eqt,"title":title,"datas":datas})
+
 
 def user_login(request):
     if request.method == 'POST':

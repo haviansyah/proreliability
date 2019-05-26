@@ -10,11 +10,13 @@ from backend.models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+
 def xls_to_response(xls, fname):
     response = HttpResponse(content_type="application/ms-excel")
     response['Content-Disposition'] = 'attachment; filename=%s' % fname
     xls.save(response)
     return response
+
 
 @api_view(['POST','GET'])
 def api_download_unit_rekap(request):
@@ -122,6 +124,70 @@ def api_get_condition(request):
     data = [{"id":i.id,"name": i.name, "count_level": get_count_level([get_report_equip(i) for i in Equipment.objects.filter(Condition_id=id_kondisi, Unit_id=i.id)])}for i in unit]
     name = kondisi.name
     return Response({"id":kondisi.id,"name":name,"units":data})
+
+
+@api_view(['GET'])
+def api_get_assetwellness_rekap(request):
+    units = AssetWellness.objects.values('unit').order_by('unit').distinct()
+    unitsa= []
+    for unit in units :
+        unitsa.append(get_assetwellness_unit(unit["unit"]))
+
+    hasil = {
+        "units" : unitsa
+    }
+
+    return Response(hasil)
+
+
+def get_assetwellness_name(unit):
+    if unit == "LT01" :
+        nama = "Unit 1"
+    elif unit == "LT02" :
+        nama = "Unit 2"
+    elif unit == "LT03" :
+        nama = "Unit 3"
+    elif unit == "LT0A" :
+        nama = "Ash Handling"
+    elif unit == "LT0B" :
+        nama = "BOP"
+    elif unit == "LT0C" :
+        nama = "Coal Handling"
+    return nama
+
+
+@api_view(['GET'])
+def get_assetwellness_report(request,id):
+    i = AssetWellness.objects.get(pk=id)
+    hasil = {"id":i.id,"asset": i.asset, "description": i.description, "condition": i.condition, "recomendation": i.recomendation,
+     "status": i.status, "judgement": i.judgement}
+    return Response(hasil)
+
+
+def get_assetwellness_unit(unit):
+    hasil = {
+        "id" : unit,
+        "name" : get_assetwellness_name(unit),
+        "count_level" : {
+            "normal": AssetWellness.objects.filter(unit=unit, judgement="HIJAU").count(),
+            "warning": AssetWellness.objects.filter(unit=unit, judgement="KUNING").count(),
+            "danger": AssetWellness.objects.filter(unit=unit, judgement="MERAH").count()
+        }
+
+    }
+    return hasil
+
+
+@api_view(['GET'])
+def api_get_assetwellness_unit(request, unit):
+    unit_get = AssetWellness.objects.filter(unit=unit)
+    unit_get_arr = [{"id":i.id,"asset":i.asset,"description":i.description,"condition":i.condition,"recomendation":i.recomendation,"status":i.status,"judgement":i.judgement}for i in unit_get]
+    hasil = {
+        "id" :unit,
+        "name" : get_assetwellness_name(unit),
+        "data" : unit_get_arr
+    }
+    return Response(hasil)
 
 
 @api_view(['POST'])
@@ -244,6 +310,30 @@ def testing(request):
     #     return HttpResponse(newMRow.__dict__)
     # else:
     #     return HttpResponse(newMRow)
+
+
+@api_view(['POST'])
+def insert_asset_wellness(request):
+    start = time.time()
+    data = request.FILES.get('data')
+    book = xlrd.open_workbook(data.name, file_contents=data.read())
+    sheet = book.sheet_by_index(0)
+    newDatas = []
+    for row in range(2, sheet.nrows):
+        asset = sheet.cell_value(row, 1)
+        description = sheet.cell_value(row,2)
+        judgement = sheet.cell_value(row,3)
+        condition = sheet.cell_value(row,5)
+        unit = sheet.cell_value(row,9)
+        status = sheet.cell_value(row,17)
+        recomendation = sheet.cell_value(row,20)
+        newData = AssetWellness(asset=asset, description=description,judgement=judgement,condition=condition,unit=unit
+                                ,status=status,recomendation=recomendation)
+        newDatas.append(newData)
+    end = time.time()
+    AssetWellness.objects.all().delete()
+    AssetWellness.objects.bulk_create(newDatas)
+    return Response({"status":"success","time":end-start})
 
 
 @api_view(['POST'])

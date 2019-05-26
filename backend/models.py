@@ -69,3 +69,13 @@ class Standard(models.Model):
     batas_normal = models.DecimalField(max_digits=10,decimal_places=2)
     batas_warning = models.DecimalField(max_digits=10,decimal_places=2)
     batas_danger = models.DecimalField(max_digits=10,decimal_places=2)
+
+
+class AssetWellness(models.Model):
+    asset = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
+    condition = models.TextField(null=True)
+    recomendation = models.TextField(null=True)
+    unit = models.CharField(max_length=5)
+    status = models.CharField(max_length=50)
+    judgement = models.CharField(max_length=20, null=True)
