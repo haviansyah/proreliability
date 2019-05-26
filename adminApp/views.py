@@ -319,20 +319,41 @@ def insert_asset_wellness(request):
     book = xlrd.open_workbook(data.name, file_contents=data.read())
     sheet = book.sheet_by_index(0)
     newDatas = []
+    error = False
     for row in range(2, sheet.nrows):
-        asset = sheet.cell_value(row, 1)
-        description = sheet.cell_value(row,2)
-        judgement = sheet.cell_value(row,3)
-        condition = sheet.cell_value(row,5)
-        unit = sheet.cell_value(row,9)
-        status = sheet.cell_value(row,17)
-        recomendation = sheet.cell_value(row,20)
-        newData = AssetWellness(asset=asset, description=description,judgement=judgement,condition=condition,unit=unit
-                                ,status=status,recomendation=recomendation)
-        newDatas.append(newData)
+        try :
+            asset = sheet.cell_value(row, 1)
+            description = sheet.cell_value(row,2)
+            judgement = sheet.cell_value(row,3)
+            condition = sheet.cell_value(row,5)
+            unit = sheet.cell_value(row,9)
+            status = sheet.cell_value(row,17)
+            recomendation = sheet.cell_value(row,20)
+        except :
+            error = True
+        try:
+            newData = AssetWellness(asset=asset, description=description,judgement=judgement,condition=condition,unit=unit
+                                    ,status=status,recomendation=recomendation)
+        except:
+            error = True
+
+        try:
+            newDatas.append(newData)
+        except :
+            error = True
+
+    try :
+        AssetWellness.objects.bulk_create(newDatas)
+    except:
+        error = True
+
+    if not error :
+        AssetWellness.objects.all().delete()
+        AssetWellness.objects.bulk_create(newDatas)
+
     end = time.time()
-    AssetWellness.objects.all().delete()
-    AssetWellness.objects.bulk_create(newDatas)
+    if error :
+        return Response({"status": "error", "time": end - start})
     return Response({"status":"success","time":end-start})
 
 

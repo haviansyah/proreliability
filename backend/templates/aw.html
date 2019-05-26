@@ -71,12 +71,7 @@
                         if (data.status == 'error') {
                             swal("Ada Kesalahan", "Ada Kesalahan Di Format Yang Anda Upload", "error")
                             var html = "";
-                            data.details.forEach(function(error){
-                                html += "<p>";
-                                html += " Sheet : "+ error.equipment + ", Baris : " + error.baris + ", Kolom : " +  error.kolom;
-                                html += "</p>"
-                            });
-                            $("#err").html("<p>Kesalahan : </p>"+html).fadeIn();
+                            $("#err").html("<p>Format Yang Anda Masukkan Salah </p>"+html).fadeIn();
 
                         } else {
                             mApp.unblock("#modalUpload .modal-content");
