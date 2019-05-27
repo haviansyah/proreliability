@@ -9,6 +9,7 @@ import datetime
 from backend.models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+import redis
 
 
 def xls_to_response(xls, fname):
@@ -16,6 +17,16 @@ def xls_to_response(xls, fname):
     response['Content-Disposition'] = 'attachment; filename=%s' % fname
     xls.save(response)
     return response
+
+@api_view(['GET'])
+def api_get_dcs_realtime(request):
+    r = redis.Redis(host='194.59.165.79', port=6379, db=0)
+    data = []
+    for i in range(1, 7):
+        for j in ['X', 'Y']:
+            data_sem = r.get('BLT1_TURSV' + str(i) + j + '.REAL').decode('utf-8')
+            data.append(data_sem)
+    return Response(data)
 
 
 @api_view(['POST','GET'])
