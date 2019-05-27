@@ -141,8 +141,10 @@ def api_get_condition(request):
 def api_get_assetwellness_rekap(request):
     units = AssetWellness.objects.values('unit').order_by('unit').distinct()
     unitsa= []
+    unitsa.append(get_assetwellness_unit("ALL"))
     for unit in units :
         unitsa.append(get_assetwellness_unit(unit["unit"]))
+
 
     hasil = {
         "units" : unitsa
@@ -164,6 +166,8 @@ def get_assetwellness_name(unit):
         nama = "BOP"
     elif unit == "LT0C" :
         nama = "Coal Handling"
+    elif unit == "ALL" :
+        nama = "Asset Wellness"
     return nama
 
 
@@ -176,22 +180,37 @@ def get_assetwellness_report(request,id):
 
 
 def get_assetwellness_unit(unit):
-    hasil = {
-        "id" : unit,
-        "name" : get_assetwellness_name(unit),
-        "count_level" : {
-            "normal": AssetWellness.objects.filter(unit=unit, judgement="HIJAU").count(),
-            "warning": AssetWellness.objects.filter(unit=unit, judgement="KUNING").count(),
-            "danger": AssetWellness.objects.filter(unit=unit, judgement="MERAH").count()
-        }
+    if unit == "ALL" :
+        hasil = {
+            "id": unit,
+            "name": get_assetwellness_name(unit),
+            "count_level": {
+                "normal": AssetWellness.objects.filter(judgement="HIJAU").count(),
+                "warning": AssetWellness.objects.filter(judgement="KUNING").count(),
+                "danger": AssetWellness.objects.filter(judgement="MERAH").count()
+            }
 
-    }
+        }
+    else:
+        hasil = {
+            "id" : unit,
+            "name" : get_assetwellness_name(unit),
+            "count_level" : {
+                "normal": AssetWellness.objects.filter(unit=unit, judgement="HIJAU").count(),
+                "warning": AssetWellness.objects.filter(unit=unit, judgement="KUNING").count(),
+                "danger": AssetWellness.objects.filter(unit=unit, judgement="MERAH").count()
+            }
+
+        }
     return hasil
 
 
 @api_view(['GET'])
 def api_get_assetwellness_unit(request, unit):
-    unit_get = AssetWellness.objects.filter(unit=unit)
+    if unit == "ALL":
+        unit_get = AssetWellness.objects.all()
+    else:
+        unit_get = AssetWellness.objects.filter(unit=unit)
     unit_get_arr = [{"id":i.id,"asset":i.asset,"description":i.description,"condition":i.condition,"recomendation":i.recomendation,"status":i.status,"judgement":i.judgement}for i in unit_get]
     hasil = {
         "id" :unit,
