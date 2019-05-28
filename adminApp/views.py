@@ -350,7 +350,7 @@ def insert_asset_wellness(request):
     sheet = book.sheet_by_index(0)
     newDatas = []
     error = False
-    for row in range(2, sheet.nrows):
+    for row in range(1, sheet.nrows):
         try :
             asset = sheet.cell_value(row, 1)
             description = sheet.cell_value(row,2)
