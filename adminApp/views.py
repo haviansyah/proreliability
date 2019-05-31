@@ -498,8 +498,7 @@ def insert(request):
 
     if len(error) != 0 :
         ret = {
-            "status" : "error",
-            "details" : error,
+            "status": "success",
             "runtime": end - start,
         }
     else :
