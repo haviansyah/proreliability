@@ -47,8 +47,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/proreliability/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="127" selection-start-line="127" selection-end-line="127" />
+            <state relative-caret-position="157">
+              <caret line="129" column="22" selection-start-line="129" selection-start-column="22" selection-end-line="129" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -444,12 +444,12 @@
       <workItem from="1559007163832" duration="1332000" />
       <workItem from="1559102534955" duration="6366000" />
       <workItem from="1559224125609" duration="715000" />
-      <workItem from="1559282942516" duration="4988000" />
+      <workItem from="1559282942516" duration="5106000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="141218000" />
+    <option name="totallyTimeSpent" value="141336000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -464,7 +464,7 @@
     <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.40242058" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.40242058" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -478,7 +478,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.37359098" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.37359098" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -690,8 +690,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/proreliability/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
+        <state relative-caret-position="157">
+          <caret line="129" column="22" selection-start-line="129" selection-start-column="22" selection-end-line="129" selection-end-column="22" />
         </state>
       </provider>
     </entry>
