@@ -79,3 +79,5 @@ class AssetWellness(models.Model):
     unit = models.CharField(max_length=5)
     status = models.CharField(max_length=50)
     judgement = models.CharField(max_length=20, null=True)
+
+

@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="3ab2cab7-0656-488d-adc3-86d3b1d9ca96" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/adminApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/aw.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/aw.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/condition.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/condition.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/metronic/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/metronic/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,32 +19,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/adminApp/views.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/templates/aw.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="354" column="30" selection-start-line="354" selection-start-column="30" selection-end-line="354" selection-end-column="30" />
+            <state relative-caret-position="3482">
+              <caret line="207" column="117" selection-start-line="207" selection-start-column="117" selection-end-line="207" selection-end-column="117" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backend/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="317">
+              <caret line="83" selection-start-line="83" selection-end-line="83" />
               <folding>
-                <element signature="e#0#42#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/templates/dcs.html">
+        <entry file="file://$PROJECT_DIR$/backend/templates/metronic/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/templates/aw.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1241">
-              <caret line="73" column="78" selection-start-line="73" selection-start-column="78" selection-end-line="73" selection-end-column="78" />
+            <state relative-caret-position="782">
+              <caret line="46" column="111" selection-start-line="46" selection-start-column="111" selection-end-line="46" selection-end-column="111" />
             </state>
           </provider>
         </entry>
@@ -108,7 +111,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/templates/unit_aw.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
+            <state relative-caret-position="2805">
               <caret line="165" column="68" selection-start-line="165" selection-start-column="68" selection-end-line="165" selection-end-column="68" />
             </state>
           </provider>
@@ -143,6 +146,7 @@
       <find>error</find>
       <find>'}}</find>
       <find>{this.state.data[</find>
+      <find>float-right</find>
     </findStrings>
     <replaceStrings>
       <replace>css&quot;}&quot;</replace>
@@ -156,6 +160,7 @@
       <replace>link(request)</replace>
       <replace>'&quot;</replace>
       <replace>&quot;</replace>
+      <replace>d-block</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -171,23 +176,23 @@
         <option value="$PROJECT_DIR$/proreliability/settings.py" />
         <option value="$PROJECT_DIR$/backend/admin.py" />
         <option value="$PROJECT_DIR$/backend/templates/unit.html" />
-        <option value="$PROJECT_DIR$/backend/templates/condition.html" />
         <option value="$PROJECT_DIR$/../01. PROJECT WEBSITE/proreability/src/App.js" />
         <option value="$PROJECT_DIR$/backend/templates/trend.html" />
-        <option value="$PROJECT_DIR$/backend/models.py" />
         <option value="$PROJECT_DIR$/backend/urls.py" />
         <option value="$PROJECT_DIR$/backend/views.py" />
-        <option value="$PROJECT_DIR$/backend/templates/metronic/base.html" />
         <option value="$PROJECT_DIR$/backend/templates/index.html" />
-        <option value="$PROJECT_DIR$/backend/templates/aw.html" />
         <option value="$PROJECT_DIR$/adminApp/urls.py" />
         <option value="$PROJECT_DIR$/backend/templates/dcs.html" />
         <option value="$PROJECT_DIR$/backend/templates/unit_aw.html" />
         <option value="$PROJECT_DIR$/adminApp/views.py" />
+        <option value="$PROJECT_DIR$/backend/templates/metronic/base.html" />
+        <option value="$PROJECT_DIR$/backend/templates/condition.html" />
+        <option value="$PROJECT_DIR$/backend/templates/aw.html" />
+        <option value="$PROJECT_DIR$/backend/models.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="50" />
     <option name="width" value="1346" />
@@ -199,7 +204,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -257,6 +261,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -478,12 +483,15 @@
       <workItem from="1558848786735" duration="991000" />
       <workItem from="1558850640922" duration="17874000" />
       <workItem from="1558991322036" duration="2139000" />
-      <workItem from="1559007163832" duration="681000" />
+      <workItem from="1559007163832" duration="1332000" />
+      <workItem from="1559102534955" duration="6366000" />
+      <workItem from="1559224125609" duration="715000" />
+      <workItem from="1559282942516" duration="1176000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128498000" />
+    <option name="totallyTimeSpent" value="137406000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -498,7 +506,7 @@
     <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.39485627" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.40242058" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -512,7 +520,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30273753" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.2753623" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -603,30 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/templates/condition.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2975">
-          <caret line="14" column="35" lean-forward="true" selection-end-line="242" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="77" column="4" selection-start-line="77" selection-start-column="4" selection-end-line="77" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/templates/metronic/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="158" column="54" selection-start-line="158" selection-start-column="54" selection-end-line="158" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/templates/unit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1241">
@@ -651,6 +635,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/adminApp/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2513">
+          <caret line="349" column="23" selection-start-line="349" selection-start-column="23" selection-end-line="349" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/templates/dcs.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -660,8 +654,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/templates/aw.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="73" column="78" selection-start-line="73" selection-start-column="78" selection-end-line="73" selection-end-column="78" />
+        <state relative-caret-position="3482">
+          <caret line="207" column="117" selection-start-line="207" selection-start-column="117" selection-end-line="207" selection-end-column="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/condition.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3757">
+          <caret line="221" column="113" selection-start-line="221" selection-start-column="113" selection-end-line="221" selection-end-column="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/metronic/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="111" selection-start-line="46" selection-start-column="111" selection-end-line="46" selection-end-column="111" />
         </state>
       </provider>
     </entry>
@@ -714,17 +722,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/templates/unit_aw.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
+        <state relative-caret-position="2805">
           <caret line="165" column="68" selection-start-line="165" selection-start-column="68" selection-end-line="165" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/adminApp/views.py">
+    <entry file="file://$PROJECT_DIR$/backend/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="354" column="30" selection-start-line="354" selection-start-column="30" selection-end-line="354" selection-end-column="30" />
+        <state relative-caret-position="317">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
           <folding>
-            <element signature="e#0#42#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
