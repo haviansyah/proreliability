@@ -19,6 +19,6 @@ urlpatterns =[
     path('condition/', views.api_get_condition),
     path('detail/', views.api_get_detail_equipment),
     path('download/', views.api_download_unit_rekap),
-    path('dcs/',views.api_get_dcs_realtime, name='DCS REALTIME')
-
+    path('dcs/',views.api_get_dcs_realtime, name='DCS REALTIME'),
+    path('hapus/',views.api_get_hapus_unit, name='hapus unit')
 ]

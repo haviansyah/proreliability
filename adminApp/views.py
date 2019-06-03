@@ -276,6 +276,20 @@ def api_get_laporan(request):
     return Response(report)
 
 
+@api_view(['GET'])
+def api_get_hapus_unit(request):
+    id_kondisi = request.GET.get('id_kondisi')
+    id_unit = request.GET.get('id_unit')
+    equipment = Equipment.objects.filter(Unit_id=id_unit,Condition_id=id_kondisi)
+    equipment.delete()
+    kondisi = Condition.objects.get(pk=id_kondisi)
+    unit = Unit.objects.get(pk=id_unit)
+    kondisi.Unit.remove(unit)
+    return Response({
+        "status" : "success"
+    })
+
+
 @api_view(['POST'])
 def api_get_equipment(request):
     id_equipment = request.POST["id"]

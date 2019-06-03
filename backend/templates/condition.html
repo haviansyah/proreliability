@@ -3,6 +3,7 @@
     {% load static %}
     <script src="{% static "assets/vendors/custom/flot/flot.bundle.js" %}" type="text/javascript"></script>
     <script>
+
         {% for unit in units %}
              var t{{ unit.id }} = [{
                     label: "Normal",
@@ -104,6 +105,38 @@
                 alert("Mohon Isi Semua")
             }
         });
+        $('.btn-hapus').on('click',function(e){
+            e.preventDefault();
+            unit = $(this).data('unit');
+            swal({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: !0
+            }).then(function(e) {
+
+                kondisi =  "{{ condition_id }}";
+                data = {
+                    "id_kondisi" : kondisi,
+                    "id_unit" : unit
+                };
+                if(e.value){
+                   fetch('/back/hapus?id_kondisi='+kondisi+'&id_unit='+unit)
+                       .then(response => response.json())
+                       .then(data => {
+                           if(data.status == "success"){
+                               swal("Berhasil","Data berhasil dihapus", "success").then(function(e){
+                                location.reload();
+                            });
+                           }
+                       })
+                }
+            })
+        })
+
     </script>
 
 {% endblock %}
@@ -196,16 +229,20 @@
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
-                                    {{ unit.name }}
+                                    <a href="{% url "backend:unit_page" kondisi_id=condition_id unit_id=unit.id %}">{{ unit.name }}</a>
                                 </h3>
                             </div>
                         </div>
                         <div class="m-portlet__head-tools">
                             <ul class="m-portlet__nav">
                                 <li class="m-portlet__nav-item">
-                                    <a href="{% url "backend:unit_page" kondisi_id=condition_id unit_id=unit.id %}"
-                                       class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-brand m-btn--pill px-4">
-                                        Detail
+                                    <a href="#" data-unit="{{ unit.id }}" class="btn-hapus m-portlet__nav-link m-portlet__nav-link--icon">
+                                        <i class="la la-trash"></i>
+                                    </a>
+                                </li>
+                                <li class="m-portlet__nav-item">
+                                    <a href="{% url "backend:unit_page" kondisi_id=condition_id unit_id=unit.id %}" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                                        <i class="la la-list"></i>
                                     </a>
                                 </li>
                             </ul>
