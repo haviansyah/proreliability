@@ -18,13 +18,14 @@ def xls_to_response(xls, fname):
     xls.save(response)
     return response
 
+
 @api_view(['GET'])
 def api_get_dcs_realtime(request):
-    r = redis.Redis(host='194.59.165.79', port=6379, db=0)
+    r = redis.Redis(host='demo.brainy.id', port=6379, db=0)
     data = []
     for i in range(1, 7):
         for j in ['X', 'Y']:
-            data_sem = r.get('BLT1_TURSV' + str(i) + j + '.REAL').decode('utf-8')
+            data_sem = r.get('BLT1_TURSV' + str(i) + j + '.REAL') and r.get('BLT1_TURSV' + str(i) + j + '.REAL').decode('utf-8') or "0"
             data.append(data_sem)
     return Response(data)
 

@@ -1,10 +1,62 @@
 from django.contrib import admin
+from django import forms
+from django.forms import ModelChoiceField
 
 from .models import *
 
 admin.site.register(Unit)
 admin.site.register(Condition)
+admin.site.register(AlatDCS)
+
 admin.site.register(Standard)
+
+
+class ModelChoiceField(ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.name
+
+
+class AlatUnitChoiceField(ModelChoiceField):
+    def label_from_instance(self, obj):
+        return "%s %s" % (obj.AlatDCS.name,obj.Unit.name)
+
+
+class TagDcsForm(forms.ModelForm):
+    AlatUnitDCS = AlatUnitChoiceField(queryset=AlatUnitDCS.objects.all())
+    class Meta :
+        model = DcsTag
+        fields = '__all__'
+
+
+class AlatUnitDcsForm(forms.ModelForm):
+    Unit = ModelChoiceField(queryset=Unit.objects.all())
+    AlatDCS = ModelChoiceField(queryset=AlatDCS.objects.all())
+    class Meta :
+        model = AlatUnitDCS
+        fields = '__all__'
+
+
+@admin.register(DcsTag)
+class DcsTag(admin.ModelAdmin):
+    def Unit(self,obj):
+        return obj.AlatUnitDCS.Unit.name
+    def Alat(self,obj):
+        return obj.AlatUnitDCS.AlatDCS.name
+    form = TagDcsForm
+    list_display = ('Unit','Alat','tag','left','top','satuan')
+    list_filter = ('AlatUnitDCS__AlatDCS__name','AlatUnitDCS__Unit__name')
+
+
+@admin.register(AlatUnitDCS)
+class AlatUnitDCS(admin.ModelAdmin):
+    def get_unit(self, obj):
+        return obj.Unit.name
+    def Alat(self, obj):
+        return obj.AlatDCS.name
+
+    list_display = ('Alat', 'get_unit')
+    form = AlatUnitDcsForm
+
 
 @admin.register(Equipment)
 class Equipment(admin.ModelAdmin):

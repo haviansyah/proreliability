@@ -81,15 +81,19 @@ class AssetWellness(models.Model):
     judgement = models.CharField(max_length=20, null=True)
 
 
-
 class AlatDCS(models.Model):
-    nama = models.CharField(max_length=200)
-    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+
+
+class AlatUnitDCS(models.Model):
+    AlatDCS = models.ForeignKey(AlatDCS,on_delete=models.CASCADE)
+    Unit = models.ForeignKey(Unit,on_delete=models.CASCADE)
 
 
 class DcsTag(models.Model):
-    Alat = models.ForeignKey(AlatDCS,on_delete=models.CASCADE)
+    AlatUnitDCS = models.ForeignKey(AlatUnitDCS,on_delete=models.CASCADE)
     tag = models.CharField(max_length=100)
+    satuan = models.CharField(max_length=100)
     left = models.DecimalField(max_digits=10,decimal_places=2, null=True)
     top = models.DecimalField(max_digits=10,decimal_places=2, null=True)
 
