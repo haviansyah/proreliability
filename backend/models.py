@@ -83,6 +83,7 @@ class AssetWellness(models.Model):
 
 class AlatDCS(models.Model):
     name = models.CharField(max_length=200)
+    image = models.CharField(max_length=200)
 
 
 class AlatUnitDCS(models.Model):

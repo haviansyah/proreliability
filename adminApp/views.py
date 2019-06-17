@@ -9,6 +9,7 @@ import datetime
 from backend.models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.templatetags.static import static
 import redis
 
 
@@ -28,6 +29,58 @@ def api_get_dcs_realtime(request):
             data_sem = r.get('BLT1_TURSV' + str(i) + j + '.REAL') and r.get('BLT1_TURSV' + str(i) + j + '.REAL').decode('utf-8') or "0"
             data.append(data_sem)
     return Response(data)
+
+
+@api_view(['GET'])
+def api_get_dcs_realtime_val(request):
+    id_alat = request.GET.get('id_alat')
+    id_unit = request.GET.get('id_unit')
+    Alatunit = AlatUnitDCS.objects.get(Unit_id=id_unit,AlatDCS_id=id_alat)
+    tags = Alatunit.dcstag_set.all()
+    r = redis.Redis(host='demo.brainy.id', port=6379, db=0)
+    data = {}
+    for tag in tags:
+        get_redis = r.get(tag.tag)
+        data_sem = get_redis and get_redis.decode('utf-8') or "0"
+        data[tag.tag] = data_sem
+
+    hasil = {
+        "status" : "success",
+        "results" : data
+    }
+
+    return Response(hasil)
+
+
+@api_view(['GET'])
+def api_get_dcs_realtime_tag(request):
+    id_alat = request.GET.get('id_alat')
+    id_unit = request.GET.get('id_unit')
+    Alatunit = AlatUnitDCS.objects.get(Unit_id=id_unit,AlatDCS_id=id_alat)
+    tags = Alatunit.dcstag_set.all()
+    r = redis.Redis(host='demo.brainy.id', port=6379, db=0)
+    data = []
+    for tag in tags:
+        get_redis = r.get(tag.tag)
+        data_sem = get_redis and get_redis.decode('utf-8') or "0"
+        tag_data = {
+            "tag": tag.tag,
+            "top": tag.top,
+            "left": tag.left,
+            "satuan" : tag.satuan,
+            "value": data_sem
+        }
+        data.append(tag_data)
+
+    hasil = {
+        "status" : "success",
+        "results" : {
+            "image" : static("assets/dcs/"+Alatunit.AlatDCS.image),
+            "tags": data
+        }
+
+    }
+    return Response(hasil)
 
 
 @api_view(['POST','GET'])
@@ -142,10 +195,10 @@ def api_get_condition(request):
 def api_get_assetwellness_rekap(request):
     units = AssetWellness.objects.values('unit').order_by('unit').distinct()
     unitsa= []
-    unitsa.append(get_assetwellness_unit("ALL"))
+    if len(AssetWellness.objects.all()) != 0 :
+        unitsa.append(get_assetwellness_unit("ALL"))
     for unit in units :
         unitsa.append(get_assetwellness_unit(unit["unit"]))
-
 
     hasil = {
         "units" : unitsa
@@ -376,6 +429,10 @@ def insert_asset_wellness(request):
             recomendation = sheet.cell_value(row,20)
         except :
             error = True
+
+        if len(unit) == 0 or unit == 'LT00' :
+            continue
+
         try:
             newData = AssetWellness(asset=asset, description=description,judgement=judgement,condition=condition,unit=unit
                                     ,status=status,recomendation=recomendation)

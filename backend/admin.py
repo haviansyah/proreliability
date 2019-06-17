@@ -7,7 +7,7 @@ from .models import *
 admin.site.register(Unit)
 admin.site.register(Condition)
 admin.site.register(AlatDCS)
-
+admin.site.register(AssetWellness)
 admin.site.register(Standard)
 
 
