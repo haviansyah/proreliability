@@ -183,7 +183,7 @@ def api_get_detail_equipment(request):
 
 @api_view(['POST'])
 def api_get_condition(request):
-    id_kondisi = request.POST["id"]
+    id_kondisi = request.POST.get("id", false)
     kondisi = Condition.objects.get(pk=id_kondisi)
     unit = kondisi.Unit.all()
     data = [{"id":i.id,"name": i.name, "count_level": get_count_level([get_report_equip(i) for i in Equipment.objects.filter(Condition_id=id_kondisi, Unit_id=i.id)])}for i in unit]
