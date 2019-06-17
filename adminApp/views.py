@@ -181,7 +181,7 @@ def api_get_detail_equipment(request):
         return Response({"status": "success"})
 
 
-@api_view(['POST'])
+
 def api_get_condition(request):
     id_kondisi = request.POST.get("id")
     kondisi = Condition.objects.get(pk=id_kondisi)
