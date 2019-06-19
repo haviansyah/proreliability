@@ -16,7 +16,7 @@ def link(request):
 def test(request):
     # equipment = Equipment.objects.get(pk=1)
     # return render(request, 'trend.html', {"equipment":equipment})
-    return render(request,'dcs2.html')
+    return render(request, 'dcs.html')
 
 
 @login_required
@@ -52,7 +52,7 @@ def user_logout(request):
 
 @login_required
 def dcs_realtime(request):
-    return render(request, 'dcs.html')
+    return render(request, 'dcs3.html')
 
 
 @login_required
