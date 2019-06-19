@@ -52,7 +52,7 @@ def user_logout(request):
 
 @login_required
 def dcs_realtime(request):
-    return render(request, 'dcs3.html')
+    return render(request, 'dcs.html')
 
 
 @login_required
