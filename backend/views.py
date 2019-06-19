@@ -12,9 +12,11 @@ def link(request):
     alamat = method+"://" + request.META['HTTP_HOST'];
     return alamat
 
+
 def test(request):
-    equipment = Equipment.objects.get(pk=1)
-    return render(request, 'trend.html', {"equipment":equipment})
+    # equipment = Equipment.objects.get(pk=1)
+    # return render(request, 'trend.html', {"equipment":equipment})
+    return render(request,'dcs2.html')
 
 
 @login_required
