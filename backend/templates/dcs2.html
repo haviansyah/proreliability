@@ -82,19 +82,23 @@
         })
         .then(data => {
             if(data.status = "success"){
+
                 results = data.results;
+                console.log(results);
                 unit = results.unit;
                 alat = results.alat;
 
                 if(unit.length > 0){
                     unit.forEach(unit => {
-                       $("#unit"+unit).addClass("notify warning");
+                        id = "#unit"+unit;
+                        console.log(id);
+                       $(id).addClass("notif warning");
                     });
                 }
 
                 if(alat.length > 0){
                     alat.forEach(unit => {
-                       $("#alat"+unit).addClass("notify warning");
+                       $("#alat"+unit).addClass("notif warning");
                     });
                 }
             }
@@ -129,9 +133,8 @@
         })
     };
 
-
-    fetchTag();
     fetchWarning();
+    fetchTag();
     {#fetchData();#}
     setInterval(fetchVal,500);
     </script>
