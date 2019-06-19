@@ -19,6 +19,26 @@ def xls_to_response(xls, fname):
     xls.save(response)
     return response
 
+@api_view(['GET'])
+def api_get_dcs_warning(request):
+    tags = DcsTag.objects.all()
+    r = redis.Redis(host='demo.brainy.id', port=6379, db=0)
+    unit = set();
+    alat = set();
+    for tag in tags:
+        get_redis = r.get(tag.tag)
+        data_sem = get_redis and get_redis.decode('utf-8') or "0"
+        if float(data_sem) > 125 :
+            unit.add(tag.AlatUnitDCS.Unit_id)
+            unit.add(tag.AlatUnitDCS.AlatDCS_id)
+    hasil = {
+        "status": "success",
+        "results": {
+            "unit" : unit,
+            "alat" : alat
+        }
+    }
+    return Response(hasil)
 
 @api_view(['GET'])
 def api_get_dcs_realtime(request):

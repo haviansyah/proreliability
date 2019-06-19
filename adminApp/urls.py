@@ -23,4 +23,6 @@ urlpatterns =[
     path('hapus/',views.api_get_hapus_unit, name='hapus unit'),
     path('dcs/tag',views.api_get_dcs_realtime_tag, name='GET TAG DCS'),
     path('dcs/val', views.api_get_dcs_realtime_val, name='GET VAL DCS'),
+    path('dcs/warning', views.api_get_dcs_warning, name='GET WARN DCS'),
+
 ]
