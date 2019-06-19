@@ -58,7 +58,7 @@
          .then(data => {
             if(data.status = "success"){
                 let results = data.results;
-
+                console.log(results);
                  document.querySelectorAll('.detail').forEach(function (el) {
                     const id = el.getAttribute("id");
                     const value = parseFloat(results[id]).toFixed(2);

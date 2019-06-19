@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ab2cab7-0656-488d-adc3-86d3b1d9ca96" name="Default Changelist" comment="" />
+    <list default="true" id="3ab2cab7-0656-488d-adc3-86d3b1d9ca96" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/templates/dcs.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/dcs.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +48,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="148">
@@ -81,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/templates/dcs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-603">
-              <caret line="14" column="14" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="14" />
+            <state relative-caret-position="128">
+              <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -191,7 +193,6 @@
         <option value="$PROJECT_DIR$/proreliability/settings.py" />
         <option value="$PROJECT_DIR$/insert.py" />
         <option value="$PROJECT_DIR$/backend/models.py" />
-        <option value="$PROJECT_DIR$/backend/templates/dcs.html" />
         <option value="$PROJECT_DIR$/backend/admin.py" />
         <option value="$PROJECT_DIR$/adminApp/invoice.html" />
         <option value="$PROJECT_DIR$/backend/templates/condition.html" />
@@ -199,6 +200,7 @@
         <option value="$PROJECT_DIR$/adminApp/views.py" />
         <option value="$PROJECT_DIR$/backend/templates/dcs2.html" />
         <option value="$PROJECT_DIR$/backend/views.py" />
+        <option value="$PROJECT_DIR$/backend/templates/dcs.html" />
       </list>
     </option>
   </component>
@@ -484,12 +486,12 @@
       <workItem from="1560738377953" duration="2424000" />
       <workItem from="1560785555164" duration="2931000" />
       <workItem from="1560834801366" duration="594000" />
-      <workItem from="1560915109215" duration="22535000" />
+      <workItem from="1560915109215" duration="22750000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197273000" />
+    <option name="totallyTimeSpent" value="197488000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -816,13 +818,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/templates/dcs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-603">
-          <caret line="14" column="14" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
@@ -830,6 +825,13 @@
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/dcs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
         </state>
       </provider>
     </entry>
