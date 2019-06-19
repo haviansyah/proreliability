@@ -75,6 +75,32 @@
             }
          })
     }
+    const fetchWarning = () => {
+        fetch("/back/dcs/warning")
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            if(data.status = "success"){
+                results = data.results;
+                unit = results.unit;
+                alat = results.alat;
+
+                if(unit.length > 0){
+                    unit.forEach(unit => {
+                       $("#unit"+unit).addClass("notify warning");
+                    });
+                }
+
+                if(alat.length > 0){
+                    alat.forEach(unit => {
+                       $("#alat"+unit).addClass("notify warning");
+                    });
+                }
+            }
+
+            }
+        ).catch(err => console.log(err));
 
     const fetchData = () => {
         fetch("/back/dcs/")
@@ -145,6 +171,10 @@
         color : #6f727d !important;
     }
 
+    .nav-link.active.notif{
+        animation: none !important;
+    }
+
     .nav-link{
         color : white !important;
     }
@@ -184,13 +214,13 @@
             <div class="dcs-container">
                 <ul class="nav nav-pills justify-content-end pt-3 pr-3">
                   <li class="nav-item">
-                    <a data-id="1" class="btn-unit nav-link active" href="#">Unit 1</a>
+                    <a id="unit1" data-id="1" class="btn-unit nav-link active" href="#">Unit 1</a>
                   </li>
                   <li class="nav-item">
-                    <a data-id="3" class="btn-unit nav-link " href="#">Unit 2</a>
+                    <a id="unit3" data-id="3" class="btn-unit nav-link " href="#">Unit 2</a>
                   </li>
                   <li class="nav-item">
-                    <a data-id="4" class="btn-unit nav-link" href="#">Unit 3</a>
+                    <a id="unit4" data-id="4" class="btn-unit nav-link" href="#">Unit 3</a>
                   </li>
                 </ul>
                 <div class="image-container">
@@ -199,7 +229,7 @@
                 <div class="bottom-nav">
                     <ul class="nav nav-pills">
                       <li class="nav-item">
-                        <a class="nav-link active" href="#">Turbine</a>
+                        <a id="alat1" class="nav-link active" href="#">Turbine</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link " href="#">PAF</a>
