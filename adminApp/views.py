@@ -30,7 +30,7 @@ def api_get_dcs_warning(request):
         data_sem = get_redis and get_redis.decode('utf-8') or "0"
         if float(data_sem) > 125 :
             unit.add(tag.AlatUnitDCS.Unit_id)
-            unit.add(tag.AlatUnitDCS.AlatDCS_id)
+            alat.add(tag.AlatUnitDCS.AlatDCS_id)
     hasil = {
         "status": "success",
         "results": {
