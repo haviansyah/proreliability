@@ -15,4 +15,5 @@ urlpatterns = [
     path('unit/<int:kondisi_id>/<int:unit_id>/', views.unit, name='unit_page'),
     path('trend/<int:id>/', views.trend, name='trend_page'),
     path('dcs/', views.dcs_realtime, name='dcs_page'),
+
 ]

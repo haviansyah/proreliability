@@ -16,7 +16,7 @@ def link(request):
 def test(request):
     # equipment = Equipment.objects.get(pk=1)
     # return render(request, 'trend.html', {"equipment":equipment})
-    return render(request, 'dcs.html')
+    return render(request, 'maps.html')
 
 
 @login_required
