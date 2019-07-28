@@ -8,7 +8,7 @@ app_name = 'backend'
 
 urlpatterns = [
     url(r'^user_login/$', views.user_login, name='user_login'),
-    url(r'^test/$', views.test, name='test'),
+    url(r'^dashboard/$', views.dashboard, name='dashboard'),
     path('condition/<int:id>/', views.condition,name='condition_page'),
     path('assetwellness/', views.asset_wellness_all,name='assetwellness_page'),
     path('assetwellness/<unit>', views.asset_wellness_unit,name='assetwellness_unit_page'),

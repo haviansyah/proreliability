@@ -10,9 +10,143 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="{% static "/assets/jvectormap/jquery-jvectormap-2.0.3.css" %}">
 </head>
+ <style>
+        body {
+          background-color: rgb(0, 175, 239);
+        }
+
+        .inset {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.6),
+            0 1px 1px rgba(0, 0, 0, 0.1);
+            background-color: transparent !important;
+            z-index: 999;
+        }
+
+        .inset img {
+            border-radius: inherit;
+            width: inherit;
+            height: inherit;
+            display: block;
+            position: relative;
+            z-index: 998;
+        }
+
+        .login-name {
+            font-weight: bold;
+            color: white;
+        }
+
+        .login-name:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+        .pro-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .kondisi {
+            width: 600px;
+            margin-top: 0px;
+        }
+
+        .kondisi h3 {
+            color: white;
+        }
+
+        .kondisi .tombol {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .kondisi a {
+            text-decoration: none;
+        }
+
+        .kondisi a:hover {
+            text-decoration: none;
+        }
+
+
+        .image {
+            height: 100px;
+
+        }
+
+        .helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .image img {
+            vertical-align: middle;
+            max-width: 80px;
+        }
+
+        .left-frame {
+            z-index: 10;
+            position: absolute;
+            left: 0;
+            top: 55%;
+            transform: translateY(-50%);
+            width: 20vw;
+        }
+
+        .left-frame ul {
+            list-style-type: none;
+        }
+
+        .left-frame ul li {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .left-frame img{
+            display: block;
+            width: 50px;
+        }
+
+
+        .left-frame span{
+            margin-top: 10px;
+            color: white;
+            font-size: 0.9em;
+            font-weight: bold;
+            display: block;
+        }
+        .jvectormap-zoomin, .jvectormap-zoomout, .jvectormap-goback{
+            left : 40px
+        }
+        .jvectormap-zoomin{
+            top: auto;
+            bottom : 50px;
+        }
+
+        .jvectormap-zoomout{
+            top: auto;
+            bottom : 30px;
+        }
+
+        image.jvectormap-marker.jvectormap-element {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+          50% {
+            opacity: 0;
+          }
+        }
+
+    </style>
 <body style="overflow: hidden">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparent px-5 pt-3">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-transparent px-5 pt-3">
     <a class="navbar-brand" href="#">PRO-Reliability</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,8 +183,10 @@
 
 
 
-<script src="https://code.jquery.com/j  query-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
         integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
         crossorigin="anonymous"></script>
@@ -67,27 +203,7 @@
        legenda = ["Kantor Pusat","Kantor Penjualan", "Pabrik","Legenda"];
    }
    var pabrik = [
-      {status:'factory',name:"Pabrik Sumut",coords :[3.5741372 , 98.4837574], img : "PPB SMT.jpg", alamat :"Jl. Binjai Km. 15,5 No. 1 Diski, Deli Serdang. Sumatera Utara 20351", tel : "(061) 8821543, 8821111" , email : "ppb_sumut@wika-beton.co.id" },
-      {status:'factory',name:"Pabrik Lampung",coords :[-5.1240237,104.9233755], img : "pabrik-lampung.jpg", alamat :"Jl. Raya Tegineneng Km. 35 Desa Bumi Agung, Pesawaran 35363", tel : "(0725) 41318" , email : "ppb_lampung@wka-beton.co.id" },
-      {status:'factory',name:"Pabrik Bogor",coords :[-6.4537305,106.9239429], img : "narogong.png", alamat :"Jl. Raya Narogong Km. 26, Cileungsi, Bogor 16820", tel : "(021) 8674010" , email : "ppb_bogor@wika-beton.co.id" },
-      {status:'factory',name:"Pabrik Karawang",coords :[-6.4070848,107.3297575], img : "pabrik-karawang.jpg", alamat :"Jl. Surya Madya III Kav.1-34 Kawasan Industri Surya Cipta Karawang 41361", tel : "(021) 89115167" , email : "ppb_karawang@wika-beton.co.id" },
-      {status:'factory',name:"Pabrik Majalengka",coords :[-6.7397985,108.2327882], img : "majalengka.png", alamat :"Jl. Raya Burujul Kulon, Jatiwangi, Majalengka 45454", tel : "(0233) 882575" , email : "ppb_majalengka@wika-beton.co.id" },
-      {status:'factory',name:"Pabrik Pasuruan",coords :[-7.5625402,112.6871222], img : "pabrik-pasuruan.jpg", alamat :"Jl. Raya Kejapanan No. 323 Gempol, Pasuruan 67155", tel : "(0343) 852130, 851488, 853161" , email : "ppb_pasuruan@wika-beton.co.id" },
-      {status:'factory',name:"Pabrik Boyolali",coords :[-7.5351266,110.634712], img : "pabrik-boyolali.png", alamat :"Jl. Raya Boyolali-Solo Km. 4,5 Mojosongo, Boyolali 57300", tel : "(0276) 321138," , email : "ppb_boyolali@wika-beton.co.id" },
-      {status:'factory',name:"Pabrik Lampung Selatan",coords :[-5.7363646,105.6630651], img : "pabrik-lampung-selatan.jpg", alamat :"Jl. Wijaya Karya Beton (Jl. Lintas Timur Sumatera Km. 4) Dusun Yogaloka, Desa Sumur Kec. Ketapang, Kab. Lampung Selatan", tel : "-" , email : "-" },
-      {status:'factory',name:"Pabrik Subang",coords :[-6.4653357,107.573159], img : "pabrik-subang.jpg", alamat :"Karangmukti, Cipeundeuy, Subang Regency, West Java 41262", tel : "-" , email : "-" },
-      {status:'factory',name:"Pabrik Sulawesi Selatan",coords :[-5.0938152,119.4933326], img : "pabrik-sulsel.jpg", alamat :"Jl. Kima Raya II Kav. S/4-5-6 Kawasan Industri Makasar,Makasar 90241", tel : "(0411) 511764" , email : "ppb_sulsel@wika-beton.co.id" },
-      {status:'headOffice',name:"WIKA TOWER 1",coords :[-6.2425838,106.8762497], img : "gedung_wika.jpg", alamat :"Jl. D.I. Panjaitan Kav. 9, RT. 01/RW. 11, Cipinang Cimpedak, Jatinegara, Jakarta Timur 13340", tel : "(021) 8192802" , email : "sekper@wika-beton.co.id" },
-      {status:'salesOffice',name:"Wilayah Penjualan 1 (Representatif Riau)",coords :[0.4819764,101.4516129], img : "gedung_wika.jpg", alamat :"Komplek Perkantoran Grand Sudirman Blok D-17, Jl. Parit Indah/Datuk Setia Maharaja,Pekanbaru 28282", tel : "(0761) 849909" , email : "riau@wika-beton.co.id" },
-      {status:'salesOffice',name:"Wilayah Penjualan 1",coords :[3.6283916,98.6809497], img : "gedung_wika.jpg", alamat :"Jl. Gunung Krakatau No. 15,Medan 20239", tel : "(061) 6626225, 6627577" , email : "wilayah1@wika-beton.co.id" },
-      {status:'salesOffice',name:"Wilayah Penjualan 2",coords :[-2.9617359,104.7732157], img : "gedung_wika.jpg", alamat :"Jl. Bambang Utoyo, Rama Kasih Raya No. 957, Palembang 30115 ", tel : "(0711) 712534, 712510 " , email : "wilayah2@wika-beton.co.id" },
-      {status:'salesOffice',name:"Wilayah Penjualan 2 (Representatif Lampung)",coords :[-5.4389751,105.2558093], img : "gedung_wika.jpg", alamat :"Jl. Wolter Monginsidi No. 222 Teluk Betung, Bandar Lampung 35215 ", tel : "(0721) 482336" , email : "lampung@wika-beton.co.id" },
-    //   {status:'salesOffice',name:"Wilayah Penjualan 3",coords :[-6.2455836,106.8742381], img : "gedung_wika.jpg", alamat :"Jl. Biru Laut X No. 20-21, Jakarta 13340", tel : "(021) 8193024" , email : "wilayah3@wika-beton.co.id" },
-      {status:'salesOffice',name:"Wilayah Penjualan 4",coords :[-7.0260299,110.4182825], img : "gedung_wika.jpg", alamat :"Jl. Teuku Umar No. 21, Semarang 50234", tel : "(024) 8411890, 8318787" , email : "wilayah4@wika-beton.co.id" },
-      {status:'salesOffice',name:"Wilayah Penjualan 5",coords :[-7.3314021,112.7282452], img : "gedung_wika.jpg", alamat :"Gedung Tamansari Papilio Lantai 5, Jl. Ahmad Yani No. 176 - 178, Surabaya", tel : "(031) 99003395, 99003396" , email : "wilayah5@wika-beton.co.id" },
-      {status:'salesOffice',name:"Wilayah Penjualan 7",coords :[-1.2746425,116.8574873], img : "gedung_wika.jpg", alamat :"Balikpapan Super Blok/Ewalk Blok A No. 1, Jl. Jendral Sudirman, Balikpapan 76114", tel : "(0542) 877027" , email : "kaltim@wika-beton.co.id" },
-      {status:'salesOffice',name:"Wilayah Penjualan 6",coords :[-5.1011214,119.5062955], img : "gedung_wika.jpg", alamat :"Jl. Kima Raya II Kav. S/4-5-6 Kawasan Industri Makassar", tel : "(0411) 511761, 4723100" , email : "wilayah6@wika-beton.co.id" },
-
+      {status:'factory',name:"PLTU Banten 3 Lontar",coords :[-6.059277, 106.461740]}
     ];
     $('#peta-indonesia').vectorMap({
         map: 'indonesia-adm1_merc',
@@ -116,22 +232,12 @@
         		{
         			 attribute: 'image',
         			 scale : {
-        			 	'headOffice' : "/assets/pin-green.png",
-        			 	'salesOffice': "/assets/pin-yellow.png",
-        			 	'factory': "/assets/pin-red.png",
+        			 	'headOffice' : "/static/assets/icon/factory.png",
+        			 	'salesOffice': "/static/assets/icon/factory.png",
+        			 	'factory': "/static/assets/icon/factory.png",
         			 },
         			 values: pabrik.reduce(function(p, c, i){ p[i] = c.status; return p }, {}),
-        			 legend: {
-			          horizontal: true,
-			          title: legenda[3],
-			          labelRender: function(v){
-			            return {
-			              headOffice: legenda[0],
-			              salesOffice: legenda[1],
-			              factory: legenda[2]
-			            }[v];
-			          }
-			        }
+
         		}
         	]
         },
@@ -146,9 +252,7 @@
         },
         markers: pabrik.map(function(h){ return {name: h.name, latLng: h.coords} }),
         onMarkerClick: function(event, code) {
-            console.log(event);
-            console.log(code)
-            modalDetail(code)
+           window.location.href='/app/dashboard';
         },
     });
 

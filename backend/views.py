@@ -13,15 +13,16 @@ def link(request):
     return alamat
 
 
-def test(request):
+@login_required
+def dashboard(request):
     # equipment = Equipment.objects.get(pk=1)
     # return render(request, 'trend.html', {"equipment":equipment})
-    return render(request, 'maps.html')
+    return render(request, 'index.html')
 
 
 @login_required
 def index(request):
-    return render(request,'index.html')
+    return render(request,'maps.html')
 
 
 @login_required
