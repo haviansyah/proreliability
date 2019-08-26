@@ -7,7 +7,7 @@
     NodeList.prototype.forEach = Array.prototype.forEach;
     let datas = [];
     let unit = 1;
-    let alat = 2;
+    let alat = 1;
 
     const btnUnit = $(".btn-unit");
     btnUnit.on('click',function(){
@@ -16,6 +16,17 @@
         imageContainer.style.backgroundImage = "";
         imageContainer.innerHTML = `<p class="float-center text-center text-white">Loading ...</p>`;
         $(".btn-unit").removeClass("active");
+        $(this).addClass("active");
+        fetchTag();
+    });
+
+    const btnAlat = $(".btn-alat");
+    btnAlat.on('click',function(){
+        const imageContainer = document.querySelector(".image-container");
+        alat = $(this).data("id");
+        imageContainer.style.backgroundImage = "";
+        imageContainer.innerHTML = `<p class="float-center text-center text-white">Loading ...</p>`;
+        $(".btn-alat").removeClass("active");
         $(this).addClass("active");
         fetchTag();
     });
@@ -210,13 +221,13 @@
                 <div class="bottom-nav">
                     <ul class="nav nav-pills">
                       <li class="nav-item">
-                        <a id="alat1" class="nav-link active" href="#">Turbine</a>
+                        <a id="alat1" data-id="1" class="btn-alat nav-link active" href="#">Turbine</a>
                       </li>
                       <li class="nav-item">
-                        <a id="alat1" class="nav-link " href="#">BFPT</a>
+                        <a id="alat2" data-id="2" class="btn-alat nav-link " href="#">BFPT</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">APF</a>
+                        <a id="alat3" data-id="3" class="btn-alat nav-link " href="#">PAF</a>
                       </li>
                     </ul>
                 </div>

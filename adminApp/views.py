@@ -12,8 +12,7 @@ from rest_framework.response import Response
 from django.templatetags.static import static
 import redis
 
-def __init__(self):
-    self.redis_init = redis.Redis(host='demo.brainy.id', port=6379, db=0,password="Ic3Fr0g212")
+REDIS_INIT = redis.Redis(host='demo.brainy.id', port=6379, db=0, password="Ic3Fr0g212")
 
 def xls_to_response(xls, fname):
     response = HttpResponse(content_type="application/ms-excel")
@@ -24,7 +23,7 @@ def xls_to_response(xls, fname):
 @api_view(['GET'])
 def api_get_dcs_warning(request):
     tags = DcsTag.objects.all()
-    r = self.redis_init
+    r = REDIS_INIT
     unit = set();
     alat = set();
     for tag in tags:
@@ -44,7 +43,7 @@ def api_get_dcs_warning(request):
 
 @api_view(['GET'])
 def api_get_dcs_realtime(request):
-    r = self.redis_init
+    r = REDIS_INIT
     data = []
     for i in range(1, 7):
         for j in ['X', 'Y']:
@@ -59,7 +58,7 @@ def api_get_dcs_realtime_val(request):
     id_unit = request.GET.get('id_unit')
     Alatunit = AlatUnitDCS.objects.get(Unit_id=id_unit,AlatDCS_id=id_alat)
     tags = Alatunit.dcstag_set.all()
-    r = self.redis_init
+    r = REDIS_INIT
     data = {}
     for tag in tags:
         get_redis = r.get(tag.tag)
@@ -80,7 +79,7 @@ def api_get_dcs_realtime_tag(request):
     id_unit = request.GET.get('id_unit')
     Alatunit = AlatUnitDCS.objects.get(Unit_id=id_unit,AlatDCS_id=id_alat)
     tags = Alatunit.dcstag_set.all()
-    r = self.redis_init
+    r = REDIS_INIT
     data = []
     for tag in tags:
         get_redis = r.get(tag.tag)
