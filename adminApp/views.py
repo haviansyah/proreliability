@@ -370,8 +370,8 @@ def api_get_equipment(request):
     id_equipment = request.POST["id"]
     equipment = Equipment.objects.get(pk=id_equipment)
     name = equipment.name
-    header = [{"id":i.id,"name":i.name} for i in equipment.header_set.all()]
-    hasil = {"name":name,"headers":header}
+    header = [{"id": i.id, "name": i.name} for i in equipment.header_set.all()]
+    hasil = {"name": name, "headers": header}
     return Response(hasil)
 
 

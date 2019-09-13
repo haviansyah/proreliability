@@ -2,17 +2,17 @@ from backend.models import *
 
 unit = 3
 
-for i in range(3, 4):
+for i in range(2, 4):
     DcsTag.objects.bulk_create([
-        DcsTag(AlatUnitDCS_id=str(i+3), tag=f"BLT{i}_BFPTAS1X.REAL", satuan="um", left=800, top=470),
-        DcsTag(AlatUnitDCS_id=str(i+3), tag=f"BLT{i}_BFPTAS1Y.REAL", satuan="um", left=800, top=490),
-        DcsTag(AlatUnitDCS_id=str(i+3), tag=f"BLT{i}_BFPTAS2X.REAL", satuan="um", left=700, top=280),
-        DcsTag(AlatUnitDCS_id=str(i+3), tag=f"BLT{i}_BFPTAS2Y.REAL", satuan="um", left=700, top=300),
-        DcsTag(AlatUnitDCS_id=str(i+3), tag=f"BLT{i}_BFPTAS3X.REAL", satuan="um", left=570, top=280),
-        DcsTag(AlatUnitDCS_id=str(i+3), tag=f"BLT{i}_BFPTAS3Y.REAL", satuan="um", left=570, top=300),
-        DcsTag(AlatUnitDCS_id=str(i+3), tag=f"BLT{i}_BFPTAS4X.REAL", satuan="um", left=270, top=280),
-        DcsTag(AlatUnitDCS_id=str(i+3), tag=f"BLT{i}_BFPTAS4Y.REAL", satuan="um", left=270, top=300),
-        DcsTag(AlatUnitDCS_id=str(i+3), tag=f"BLT{i}_BFPTAECC.REAL", satuan="um", left=840, top=380),
+        DcsTag(AlatUnitDCS_id=str(i+6), tag=f"BLT{i}_PAFAMNDBX.REAL", satuan="um", left=240, top=420),
+        DcsTag(AlatUnitDCS_id=str(i+6), tag=f"BLT{i}_PAFAMNDBY.REAL", satuan="um", left=240, top=440),
+        DcsTag(AlatUnitDCS_id=str(i+6), tag=f"BLT{i}_PAFAMDBX.REAL", satuan="um", left=120, top=420),
+        DcsTag(AlatUnitDCS_id=str(i+6), tag=f"BLT{i}_PAFAMDBY.REAL", satuan="um", left=120, top=440),
+        DcsTag(AlatUnitDCS_id=str(i+6), tag=f"BLT{i}_PAFBMNDBX.REAL", satuan="um", left=700, top=420),
+        DcsTag(AlatUnitDCS_id=str(i+6), tag=f"BLT{i}_PAFBMNDBY.REAL", satuan="um", left=700, top=440),
+        DcsTag(AlatUnitDCS_id=str(i+6), tag=f"BLT{i}_PAFBMDBX.REAL", satuan="um", left=820, top=420),
+        DcsTag(AlatUnitDCS_id=str(i+6), tag=f"BLT{i}_PAFBMDBY.REAL", satuan="um", left=820, top=440),
+
     ])
 
 

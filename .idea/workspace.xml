@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ab2cab7-0656-488d-adc3-86d3b1d9ca96" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/proreliability.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/proreliability.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adminApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/adminApp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/adminApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/adminApp/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/templates/dcs.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/dcs.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/insert.py" beforeDir="false" afterPath="$PROJECT_DIR$/insert.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +31,9 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="proreliability" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -43,7 +46,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1PJpbNpJbVv5dHFTFjKGJWsYMlb" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -292,8 +297,19 @@
       <workItem from="1564309929498" duration="2291000" />
       <workItem from="1564463713664" duration="1621000" />
       <workItem from="1564636776294" duration="4121000" />
-      <workItem from="1566799292965" duration="7630000" />
+      <workItem from="1566799292965" duration="7766000" />
+      <workItem from="1566889767015" duration="3960000" />
+      <workItem from="1566961857045" duration="3718000" />
+      <workItem from="1568348494010" duration="2184000" />
     </task>
+    <task id="LOCAL-00001" summary="Penambahan DCS BFPT &amp; PAF (Baru Gambar)">
+      <created>1566815503943</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1566815503943</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -320,5 +336,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Penambahan DCS BFPT &amp; PAF (Baru Gambar)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Penambahan DCS BFPT &amp; PAF (Baru Gambar)" />
   </component>
 </project>
