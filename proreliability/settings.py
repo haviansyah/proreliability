@@ -25,7 +25,7 @@ SECRET_KEY = 'us3f90r^@ev9=l@pl55==ep_4rj_ox&#6t$mpude2etr#0=0d='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['demo.brainy.id','www.demo.brainy.id',"192.168.0.99","127.0.0.1","fc7208ad.ngrok.io"]
+ALLOWED_HOSTS = ['13.229.167.2','demo.brainy.id','www.demo.brainy.id',"192.168.0.99","127.0.0.1","fc7208ad.ngrok.io"]
 
 
 # Application definition
