@@ -53,7 +53,9 @@ def user_logout(request):
 
 @login_required
 def dcs_realtime(request):
-    return render(request, 'dcs.html')
+    alat = AlatDCS.objects.all();
+    unit = Unit.objects.all();
+    return render(request, 'dcs.html',{"alats" : alat,"units":unit})
 
 
 @login_required
