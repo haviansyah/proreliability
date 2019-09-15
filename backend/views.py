@@ -54,8 +54,7 @@ def user_logout(request):
 @login_required
 def dcs_realtime(request):
     alat = AlatDCS.objects.all()
-    unit = Unit.objects.all()
-    unit = unit[:-1]
+    unit = Unit.objects.exclude(name="Common")
     return render(request, 'dcs.html',{"alats" : alat,"units":unit})
 
 
