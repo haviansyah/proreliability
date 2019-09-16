@@ -9,7 +9,7 @@ import datetime
 from backend.models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.templatetags.static import static
+from django.templatetags.static import staticp
 import redis
 
 REDIS_INIT = redis.Redis(host='localhost', port=6379, db=0, password="Ic3Fr0g212")
