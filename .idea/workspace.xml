@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ab2cab7-0656-488d-adc3-86d3b1d9ca96" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/dcs.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/dcs.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,12 +57,12 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Project\PLTU LONTAR\proreliability\backend\templates" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Project\PLTU LONTAR\proreliability\static\assets\icon" />
       <recent name="D:\Project\PLTU LONTAR\proreliability\adminApp\templates\adminApp" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Project\PLTU LONTAR\proreliability\backend\templates" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -297,7 +298,8 @@
       <workItem from="1566889767015" duration="3960000" />
       <workItem from="1566961857045" duration="3718000" />
       <workItem from="1568348494010" duration="2461000" />
-      <workItem from="1568528915705" duration="2848000" />
+      <workItem from="1568528915705" duration="4063000" />
+      <workItem from="1568633677984" duration="641000" />
     </task>
     <task id="LOCAL-00001" summary="Penambahan DCS BFPT &amp; PAF (Baru Gambar)">
       <created>1566815503943</created>

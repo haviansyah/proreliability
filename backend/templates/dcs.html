@@ -207,7 +207,7 @@
                 <ul class="nav nav-pills justify-content-end pt-3 pr-3">
                   {% for unit in units %}
                       <li class="nav-item">
-                        <a id="unit{{ unit.id }}" data-id="{{ unit.id }}" class="btn-unit nav-link active" href="#">{{ unit.name }}</a>
+                        <a id="unit{{ unit.id }}" data-id="{{ unit.id }}" class="btn-unit nav-link {% if unit.id == 1 %} active {% endif %}" href="#">{{ unit.name }}</a>
                       </li>
                 {% endfor %}
                 </ul>
