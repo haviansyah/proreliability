@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from django.templatetags.static import static
 import redis
 
-REDIS_INIT = redis.Redis(host='demo.brainy.id', port=6379, db=0, password="Ic3Fr0g212")
+REDIS_INIT = redis.Redis(host='localhost', port=6379, db=0, password="Ic3Fr0g212")
 
 def xls_to_response(xls, fname):
     response = HttpResponse(content_type="application/ms-excel")

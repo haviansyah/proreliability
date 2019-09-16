@@ -209,22 +209,18 @@
                       <li class="nav-item">
                         <a id="unit{{ unit.id }}" data-id="{{ unit.id }}" class="btn-unit nav-link {% if unit.id == 1 %} active {% endif %}" href="#">{{ unit.name }}</a>
                       </li>
-                {% endfor %}
+                  {% endfor %}
                 </ul>
                 <div class="image-container">
                    <p class="float-center text-center text-white">Loading ...</p>
                 </div>
                 <div class="bottom-nav">
                     <ul class="nav nav-pills">
+                        {% for alat in alats %}
                       <li class="nav-item">
-                        <a id="alat1" data-id="1" class="btn-alat nav-link active" href="#">Turbine</a>
+                        <a id="alat{{ alat.id }}" data-id="{{ alat.id }}" class="btn-alat nav-link {% if alat.id == 1 %}active{% endif %}" href="#">{{ alat.name }}</a>
                       </li>
-                      <li class="nav-item">
-                        <a id="alat2" data-id="2" class="btn-alat nav-link " href="#">BFPT</a>
-                      </li>
-                      <li class="nav-item">
-                        <a id="alat3" data-id="3" class="btn-alat nav-link " href="#">PAF</a>
-                      </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
